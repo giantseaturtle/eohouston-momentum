@@ -15,12 +15,7 @@ python3 -m http.server 5173
 ```
 
 ## Deploy to Vercel
-```bash
-cd ~/eohouston-momentum
-vercel        # preview
-vercel --prod # production
-```
-(No framework preset needed - Vercel serves the static files as-is.)
+Git integration: push to `main` deploys production (eomomentum.com); any other branch gets a preview URL. No CLI deploys needed. (No framework preset - Vercel serves the static files as-is.)
 
 ## Things to swap before going live
 - **About section** (`index.html`, `#about`) - photos live in `assets/team/`:
