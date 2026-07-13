@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.eomomentum.com" }],
+      "destination": "https://eomomentum.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.eomomentum.com" }],
+      "destination": "https://eomomentum.com/:path*",
+      "permanent": true
+    }
+  ]
+}
