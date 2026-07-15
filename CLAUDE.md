@@ -28,13 +28,11 @@ Most people editing this repo are non-technical; they open Claude Code, describe
 - `vercel.json` - www -> apex redirects only.
 - `momentum-email.html`, `momentum-email-eo.html` - EMAIL DRAFTS, not site pages. They are not linked from the site and carry their own copies of dates/links. Only touch when asked to prep an email.
 
-## Recurring gotcha: the webinar link
+## The webinar banner
 
-The Zoom webinar registration link and its date/time appear in TWO places in `index.html`:
-1. Hero banner (`.hero-webinar`, near the top)
-2. Admissions section (`.admit-webinar`, near the bottom)
+The webinar is DATA, not HTML: it lives in `webinar.json` at the repo root. `main.js` reads it and fills two hidden skeletons in `index.html` (hero `#hero-webinar` + admissions `#admit-webinar`); nothing shows when `enabled` is false, and it auto-hides 90 minutes after `startISO`. To change the webinar, edit `webinar.json` (set `enabled`, `startISO` like `2026-08-12T10:30:00-05:00`, `displayText` like `Tuesday, August 12, 2026, 10:30 AM CT`, and the Zoom `link`) and push - never hardcode webinar dates back into `index.html`.
 
-When the webinar changes, update the `href` AND the visible date/time text in BOTH spots. Zoom registration pages are client-rendered - curl won't show the date; open the link in a browser to confirm date/time before writing it into copy.
+Non-technical people can do the same thing through the admin page at https://eomomentum.com/admin (access code required) - it posts to `api/webinar.js`, which commits `webinar.json` via the GitHub API (needs `ADMIN_PASSWORD` + `GITHUB_TOKEN` env vars in the Vercel project). Zoom registration pages are client-rendered - curl won't show the date; open the link in a browser to confirm date/time before publishing it.
 
 ## Copy conventions
 

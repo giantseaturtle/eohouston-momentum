@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>EO Momentum - Webinar Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/eo-favicon-32.png" />
+  <style>
+    :root {
+      --eo-navy: #0A1F44; --purple: #6D45D0; --violet: #9B6BFF;
+      --ink: #16182a; --body: #3a3f55; --muted: #6b7290;
+      --line: #e6e8f0; --bg-soft: #f6f7fb; --ok: #147a4d; --err: #b3261e;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif; color: var(--body);
+      background: var(--bg-soft); min-height: 100vh; display: flex;
+      align-items: flex-start; justify-content: center; padding: 48px 16px;
+    }
+    .card {
+      background: #fff; border: 1px solid var(--line); border-radius: 18px;
+      padding: 32px 28px; width: 100%; max-width: 460px;
+      box-shadow: 0 8px 30px rgba(10, 31, 68, 0.06);
+    }
+    h1 { font-family: 'Sora', sans-serif; color: var(--eo-navy); font-size: 1.35rem; margin-bottom: 4px; }
+    .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 22px; }
+    .status {
+      background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px;
+      padding: 12px 14px; font-size: 0.92rem; margin-bottom: 24px;
+    }
+    .status strong { color: var(--ink); }
+    label { display: block; font-weight: 600; color: var(--ink); font-size: 0.88rem; margin: 16px 0 6px; }
+    input {
+      width: 100%; padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px;
+      font: inherit; font-size: 0.95rem; color: var(--ink); background: #fff;
+    }
+    input:focus { outline: 2px solid var(--violet); outline-offset: 1px; border-color: var(--violet); }
+    .row { display: flex; gap: 12px; }
+    .row > div { flex: 1; }
+    .hint { color: var(--muted); font-size: 0.8rem; margin-top: 5px; }
+    button {
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem;
+      border: none; border-radius: 12px; padding: 13px 18px; cursor: pointer; width: 100%;
+    }
+    .publish { background: linear-gradient(135deg, #6D45D0 0%, #9B6BFF 100%); color: #fff; margin-top: 24px; }
+    .publish:hover { filter: brightness(1.07); }
+    .remove { background: none; color: var(--err); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 0.85rem; margin-top: 14px; }
+    .remove:hover { text-decoration: underline; }
+    button:disabled { opacity: 0.55; cursor: default; }
+    .msg { margin-top: 18px; font-size: 0.92rem; border-radius: 10px; padding: 12px 14px; display: none; }
+    .msg.ok { display: block; background: #eaf6f0; color: var(--ok); }
+    .msg.err { display: block; background: #fdeceb; color: var(--err); }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0d1226; }
+      .card { background: #141a33; border-color: #26304f; box-shadow: none; }
+      h1 { color: #fff; }
+      body, .status { color: #b9c0d8; }
+      .status { background: #0d1226; border-color: #26304f; }
+      label, input, .status strong { color: #e8eaf4; }
+      input { background: #0d1226; border-color: #26304f; }
+      .msg.ok { background: #10301f; color: #7fd6a6; }
+      .msg.err { background: #3a1512; color: #f2a099; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Webinar admin</h1>
+    <p class="sub">Set the next informational webinar shown on eomomentum.com.</p>
+
+    <div class="status" id="status">Checking what's currently on the site&hellip;</div>
+
+    <form id="form">
+      <label for="date">Webinar date</label>
+      <input type="date" id="date" required />
+
+      <label for="time">Start time (Central Time)</label>
+      <input type="time" id="time" required />
+
+      <label for="link">Zoom registration link</label>
+      <input type="url" id="link" placeholder="https://us06web.zoom.us/meeting/register/..." required />
+      <p class="hint">In Zoom: your meeting &rarr; Registration &rarr; copy the registration link.</p>
+
+      <label for="code">Access code</label>
+      <input type="password" id="code" autocomplete="current-password" required />
+
+      <button type="submit" class="publish" id="publishBtn">Publish to the website</button>
+      <button type="button" class="remove" id="removeBtn">Remove the current webinar from the site</button>
+    </form>
+
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <script>
+    var msg = document.getElementById('msg');
+    var statusBox = document.getElementById('status');
+    var publishBtn = document.getElementById('publishBtn');
+    var removeBtn = document.getElementById('removeBtn');
+
+    fetch('/webinar.json', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (w) {
+        statusBox.innerHTML = (w && w.enabled && w.displayText)
+          ? 'Currently on the site: <strong>' + w.displayText + '</strong>'
+          : 'Currently on the site: <strong>no webinar listed</strong>.';
+      })
+      .catch(function () { statusBox.textContent = 'Could not check the current webinar.'; });
+
+    function send(payload) {
+      msg.className = 'msg';
+      publishBtn.disabled = true; removeBtn.disabled = true;
+      publishBtn.textContent = 'Saving…';
+      return fetch('/api/webinar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          msg.className = res.ok ? 'msg ok' : 'msg err';
+          msg.textContent = res.ok ? res.j.message : (res.j.error || 'Something went wrong.');
+        })
+        .catch(function () {
+          msg.className = 'msg err';
+          msg.textContent = 'Could not reach the server. Check your connection and try again.';
+        })
+        .finally(function () {
+          publishBtn.disabled = false; removeBtn.disabled = false;
+          publishBtn.textContent = 'Publish to the website';
+        });
+    }
+
+    document.getElementById('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      send({
+        action: 'publish',
+        code: document.getElementById('code').value,
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        link: document.getElementById('link').value.trim()
+      });
+    });
+
+    removeBtn.addEventListener('click', function () {
+      var code = document.getElementById('code').value;
+      if (!code) {
+        msg.className = 'msg err';
+        msg.textContent = 'Enter the access code first, then click remove.';
+        return;
+      }
+      if (!confirm('Remove the webinar from the website?')) return;
+      send({ action: 'remove', code: code });
+    });
+  </script>
+</body>
+</html>
