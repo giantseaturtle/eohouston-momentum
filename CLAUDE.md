@@ -34,9 +34,15 @@ The webinar is DATA, not HTML: it lives in `webinar.json` at the repo root. `mai
 
 Non-technical people can do the same thing through the admin page at https://eomomentum.com/admin (access code required) - it posts to `api/webinar.js`, which commits `webinar.json` via the GitHub API (needs `ADMIN_PASSWORD` + `GITHUB_TOKEN` env vars in the Vercel project). Zoom registration pages are client-rendered - curl won't show the date; open the link in a browser to confirm date/time before publishing it.
 
-## The "Talk to us" booking section
+## The contact page
 
-`#talk` (between Admissions and the final CTA) embeds Robert's Google Calendar appointment page in an iframe. The short link is `https://calendar.app.google/ZG9A3rZGH8xY2ntP8`; the iframe needs the expanded form, `https://calendar.google.com/calendar/appointments/schedules/<ID>?gv=true`. If the booking link ever changes, update BOTH the iframe `src` and the plain-text fallback link in that section, plus the `#talk` links in the hero, admissions, final CTA, nav, mobile nav, and footer.
+`contact.html` is the second page on the site (served at `/contact`, `cleanUrls` is on). It embeds Robert's Google Calendar appointment page in an iframe so people can book a 15-minute call. Deliberately NOT on the homepage: the booking card shows Robert's phone number, so it should only appear for people who click through to contact us.
+
+The short link is `https://calendar.app.google/ZG9A3rZGH8xY2ntP8`; the iframe needs the expanded form, `https://calendar.google.com/calendar/appointments/schedules/<ID>?gv=true`. If the booking link changes, update both the iframe `src` and the plain-text fallback link on that page.
+
+`contact.html` carries its own copy of the header and footer. Any nav, brand, or footer change on the homepage has to be mirrored there by hand, with the anchors written as `/#program`-style absolute links.
+
+`/contact` is linked from the homepage hero, admissions, final CTA, nav, mobile nav, and footer.
 
 ## Copy conventions
 
