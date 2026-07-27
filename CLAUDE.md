@@ -34,6 +34,10 @@ The webinar is DATA, not HTML: it lives in `webinar.json` at the repo root. `mai
 
 Non-technical people can do the same thing through the admin page at https://eomomentum.com/admin (access code required) - it posts to `api/webinar.js`, which commits `webinar.json` via the GitHub API (needs `ADMIN_PASSWORD` + `GITHUB_TOKEN` env vars in the Vercel project). Zoom registration pages are client-rendered - curl won't show the date; open the link in a browser to confirm date/time before publishing it.
 
+## The "Talk to us" booking section
+
+`#talk` (between Admissions and the final CTA) embeds Robert's Google Calendar appointment page in an iframe. The short link is `https://calendar.app.google/ZG9A3rZGH8xY2ntP8`; the iframe needs the expanded form, `https://calendar.google.com/calendar/appointments/schedules/<ID>?gv=true`. If the booking link ever changes, update BOTH the iframe `src` and the plain-text fallback link in that section, plus the `#talk` links in the hero, admissions, final CTA, nav, mobile nav, and footer.
+
 ## Copy conventions
 
 - No em dashes in site copy; use a hyphen, comma, or new sentence.

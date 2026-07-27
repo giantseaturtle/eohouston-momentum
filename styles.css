@@ -118,12 +118,13 @@ a { color: var(--purple); text-decoration: none; }
   background-clip: text;
   color: transparent;
 }
-.nav { display: flex; gap: 1.25rem; margin-left: auto; }
+.nav { display: flex; gap: 1.05rem; margin-left: auto; }
 .nav a {
   color: var(--eo-navy);
   font-weight: 500;
   font-size: 0.92rem;
   opacity: 0.85;
+  white-space: nowrap;
   transition: opacity 0.15s ease;
 }
 .nav a:hover { opacity: 1; }
@@ -203,6 +204,7 @@ a { color: var(--purple); text-decoration: none; }
   border-radius: var(--radius-sm); text-decoration: none;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
+.hero-webinar[hidden] { display: none; }
 .hero-webinar:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.32); }
 .hw-tag {
   font-family: 'Sora', sans-serif; font-size: 0.68rem; font-weight: 700;
@@ -403,6 +405,58 @@ a { color: var(--purple); text-decoration: none; }
 .admit-webinar strong { color: var(--ink); }
 .admit-webinar a { color: var(--purple); font-weight: 600; white-space: nowrap; }
 .admit-webinar a:hover { color: var(--violet); }
+.admit-talk { margin: 1.1rem 0 0; color: var(--muted); font-size: 0.98rem; }
+.admit-talk a { color: var(--purple); font-weight: 600; }
+.admit-talk a:hover { color: var(--violet); }
+
+/* ===== Talk to us (booking embed) ===== */
+.section-talk { background: var(--bg-soft); border-top: 1px solid var(--line); }
+.talk-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3rem; align-items: start; }
+.talk-copy h2 { margin-bottom: 1rem; }
+.talk-points { list-style: none; padding: 0; margin: 1.6rem 0; display: grid; gap: 0.75rem; }
+.talk-points li {
+  position: relative; padding-left: 1.9rem; color: var(--body); font-size: 1rem;
+}
+.talk-points li::before {
+  content: ""; position: absolute; left: 0; top: 0.55rem;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--grad-cyan);
+}
+.talk-deadline {
+  margin: 0 0 1.2rem; padding: 0.9rem 1.15rem;
+  background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--purple);
+  border-radius: var(--radius-sm); font-size: 0.98rem; color: var(--body);
+}
+.talk-deadline strong { color: var(--ink); }
+.talk-link { color: var(--purple); font-weight: 600; font-size: 0.95rem; }
+.talk-link:hover { color: var(--violet); }
+
+.talk-embed {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.talk-embed-head {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px solid var(--line);
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem;
+  color: var(--ink); letter-spacing: 0.01em;
+}
+.talk-dot {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--grad);
+  box-shadow: 0 0 0 4px rgba(109, 69, 208, 0.14);
+}
+.talk-frame { display: block; width: 100%; height: 840px; border: 0; background: #fff; }
+
+/* ===== Final CTA secondary line ===== */
+.cta-alt {
+  position: relative; margin: 1.4rem 0 0;
+  font-size: 0.98rem; color: rgba(255, 255, 255, 0.72);
+}
+.cta-alt a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.cta-alt a:hover { color: var(--violet); }
 
 /* ===== FAQ ===== */
 .section-faq { background: var(--bg-soft); }
@@ -647,6 +701,12 @@ a { color: var(--purple); text-decoration: none; }
 .footer-legal p { font-size: 0.8rem; color: rgba(255, 255, 255, 0.45); margin: 0; }
 
 /* ===== Responsive ===== */
+/* Narrow laptops: nav links stay on one line, so drop Member Login first */
+@media (max-width: 1180px) {
+  .header-login { display: none; }
+  .nav { gap: 0.85rem; }
+  .nav a { font-size: 0.88rem; }
+}
 @media (max-width: 900px) {
   .nav, .header-login { display: none; }
   .header-inner { gap: 0.7rem; }
@@ -658,6 +718,8 @@ a { color: var(--purple); text-decoration: none; }
   .partner-grid { grid-template-columns: repeat(2, 1fr); }
   .team-grid, .team-grid--3 { grid-template-columns: 1fr; max-width: 420px; }
   .admit-dates { grid-template-columns: repeat(2, 1fr); }
+  .talk-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .talk-frame { height: 780px; }
 }
 @media (max-width: 560px) {
   /* Tighten hero so the four stats sit higher (toward above-the-fold) */
@@ -673,6 +735,9 @@ a { color: var(--purple); text-decoration: none; }
   .stat-num { font-size: 0.95rem; white-space: nowrap; }
   .stat-label { font-size: 0.48rem; letter-spacing: 0.02em; white-space: nowrap; }
   .hero-stats > div.stat-divider { display: none; }
+
+  .talk-frame { height: 720px; }
+  .talk-embed { border-radius: var(--radius-sm); }
 }
 
 @media (prefers-reduced-motion: reduce) {
