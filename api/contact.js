@@ -58,6 +58,9 @@ module.exports = async (req, res) => {
   if (!email || !EMAIL_RE.test(String(email).trim())) {
     return res.status(400).json({ error: 'Please enter a valid email address.' });
   }
+  if (!company || !String(company).trim()) {
+    return res.status(400).json({ error: 'Please enter your company name.' });
+  }
   if (!message || !String(message).trim()) {
     return res.status(400).json({ error: 'Please enter a message.' });
   }

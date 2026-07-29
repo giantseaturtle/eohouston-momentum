@@ -142,12 +142,12 @@
               <input type="tel" id="cf-phone" name="phone" autocomplete="tel" />
             </div>
             <div class="cf-field">
-              <label for="cf-company">Company <span class="cf-optional">(optional)</span></label>
-              <input type="text" id="cf-company" name="company" autocomplete="organization" />
+              <label for="cf-company">Company Name</label>
+              <input type="text" id="cf-company" name="company" autocomplete="organization" required />
             </div>
           </div>
           <div class="cf-field">
-            <label for="cf-message">What's on your mind?</label>
+            <label for="cf-message">Tell us about your business and what you'd like to know</label>
             <textarea id="cf-message" name="message" rows="5" required></textarea>
           </div>
           <!-- honeypot, left blank by real visitors -->
@@ -215,9 +215,9 @@
           website: document.getElementById('cf-website').value
         };
 
-        if (!payload.name || !payload.email || !payload.message) {
+        if (!payload.name || !payload.email || !payload.company || !payload.message) {
           msg.className = 'cf-msg err';
-          msg.textContent = 'Please fill in your name, email, and message.';
+          msg.textContent = 'Please fill in your name, email, company name, and message.';
           return;
         }
 
