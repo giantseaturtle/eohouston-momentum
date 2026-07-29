@@ -681,7 +681,7 @@ a { color: var(--purple); text-decoration: none; }
 .inline-photo {
   display: block;
   width: 100%;
-  height: 320px;
+  height: 640px;
   object-fit: cover;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -781,7 +781,7 @@ a { color: var(--purple); text-decoration: none; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
-  .inline-photo { height: 220px; }
+  .inline-photo { height: 440px; }
 
   /* Tighten hero so the four stats sit higher (toward above-the-fold) */
   .hero { padding: 1.9rem 0 2.3rem; }
