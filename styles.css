@@ -304,6 +304,13 @@ a { color: var(--purple); text-decoration: none; }
   height: 4px;
   background: var(--grad);
 }
+.card-photo {
+  display: block;
+  width: calc(100% + 3.6rem);
+  height: 170px;
+  object-fit: cover;
+  margin: -2rem -1.8rem 1.4rem;
+}
 .card-num {
   font-family: 'Sora', sans-serif;
   font-weight: 800;
@@ -338,6 +345,24 @@ a { color: var(--purple); text-decoration: none; }
   border-left: 4px solid var(--purple);
   border-image: none;
 }
+
+/* ===== Community gallery ===== */
+.section-gallery { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.gallery-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+}
+.gallery-grid li {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  aspect-ratio: 3 / 2;
+}
+.gallery-grid img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.35s ease;
+}
+.gallery-grid li:hover img { transform: scale(1.06); }
 
 /* ===== Investment ===== */
 .invest-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem; }
@@ -455,7 +480,23 @@ a { color: var(--purple); text-decoration: none; }
   width: 9px; height: 9px; border-radius: 50%; background: var(--grad);
   box-shadow: 0 0 0 4px rgba(109, 69, 208, 0.14);
 }
-.talk-frame { display: block; width: 100%; height: 960px; border: 0; background: #fff; }
+/* ===== Contact form ===== */
+.contact-form { padding: 1.4rem 1.4rem 1.6rem; }
+.cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.cf-field { margin-bottom: 1rem; }
+.cf-field label { display: block; font-weight: 600; color: var(--ink); font-size: 0.88rem; margin-bottom: 0.4rem; }
+.cf-optional { font-weight: 400; color: var(--muted); }
+.cf-field input, .cf-field textarea {
+  width: 100%; padding: 0.7rem 0.85rem; border: 1px solid var(--line); border-radius: var(--radius-sm);
+  font: inherit; font-size: 0.95rem; color: var(--ink); background: #fff;
+}
+.cf-field textarea { resize: vertical; }
+.cf-field input:focus, .cf-field textarea:focus { outline: 2px solid var(--violet); outline-offset: 1px; border-color: var(--violet); }
+.cf-hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.cf-submit { width: 100%; margin-top: 0.2rem; }
+.cf-msg { margin-top: 1rem; font-size: 0.92rem; border-radius: var(--radius-sm); padding: 0.8rem 1rem; display: none; }
+.cf-msg.ok { display: block; background: #eaf6f0; color: #147a4d; }
+.cf-msg.err { display: block; background: #fdeceb; color: #b3261e; }
 
 /* ===== Final CTA secondary line ===== */
 .cta-alt {
@@ -726,7 +767,7 @@ a { color: var(--purple); text-decoration: none; }
   .team-grid, .team-grid--3 { grid-template-columns: 1fr; max-width: 420px; }
   .admit-dates { grid-template-columns: repeat(2, 1fr); }
   .talk-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .talk-frame { height: 960px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
   /* Tighten hero so the four stats sit higher (toward above-the-fold) */
@@ -743,8 +784,9 @@ a { color: var(--purple); text-decoration: none; }
   .stat-label { font-size: 0.48rem; letter-spacing: 0.02em; white-space: nowrap; }
   .hero-stats > div.stat-divider { display: none; }
 
-  .talk-frame { height: 1450px; }
   .talk-embed { border-radius: var(--radius-sm); }
+  .cf-row { grid-template-columns: 1fr; gap: 0; }
+  .gallery-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

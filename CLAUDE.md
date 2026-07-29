@@ -36,9 +36,9 @@ Non-technical people can do the same thing through the admin page at https://eom
 
 ## The contact page
 
-`contact.html` is the second page on the site (served at `/contact`, `cleanUrls` is on). It embeds Robert's Google Calendar appointment page in an iframe so people can book a 15-minute call. Deliberately NOT on the homepage: the booking card shows Robert's phone number, so it should only appear for people who click through to contact us.
+`contact.html` is the second page on the site (served at `/contact`, `cleanUrls` is on). It has a contact form (name, email, phone, company, message) that POSTs to `api/contact.js`, which emails the submission to robert@skyhighpartyrentals.com via Resend (needs `RESEND_API_KEY` env var in the Vercel project). Reply-To is set to the submitter's address so Robert can just hit reply. There's a hidden honeypot field (`website`) for spam bots; real visitors never see or fill it.
 
-The short link is `https://calendar.app.google/ZG9A3rZGH8xY2ntP8`; the iframe needs the expanded form, `https://calendar.google.com/calendar/appointments/schedules/<ID>?gv=true`. If the booking link changes, update both the iframe `src` and the plain-text fallback link on that page.
+Sender address defaults to Resend's shared `onboarding@resend.dev`, which Resend allows to send to the email that owns the API key without any domain setup - fine as long as the destination stays robert@skyhighpartyrentals.com. To send "from" an eomomentum.com address instead (better deliverability/branding), verify that domain in Resend and set `CONTACT_FROM_EMAIL` (e.g. `"EO Momentum <contact@eomomentum.com>"`).
 
 `contact.html` carries its own copy of the header and footer. Any nav, brand, or footer change on the homepage has to be mirrored there by hand, with the anchors written as `/#program`-style absolute links.
 

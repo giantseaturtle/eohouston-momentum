@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | EO Houston Momentum</title>
-  <meta name="description" content="Book a 15-minute call with EO Houston Momentum. A straight conversation about your business and whether the October 2026 cohort is the right fit." />
+  <meta name="description" content="Send us a message about EO Houston Momentum. A straight answer about your business and whether the October 2026 cohort is the right fit." />
   <meta name="robots" content="index, follow" />
   <meta property="og:title" content="Contact | EO Houston Momentum" />
-  <meta property="og:description" content="Book a 15-minute call about EO Houston Momentum. No pitch, just a straight conversation about your business." />
+  <meta property="og:description" content="Send us a message about EO Houston Momentum. No pitch, just a straight conversation about your business." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://eomomentum.com/contact" />
   <meta property="og:image" content="https://eomomentum.com/assets/og-image.png" />
@@ -16,7 +16,7 @@
   <meta property="og:image:alt" content="EO Houston Momentum. Stop grinding. Start growing." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Contact | EO Houston Momentum" />
-  <meta name="twitter:description" content="Book a 15-minute call about EO Houston Momentum." />
+  <meta name="twitter:description" content="Send us a message about EO Houston Momentum." />
   <meta name="twitter:image" content="https://eomomentum.com/assets/og-image.png" />
   <link rel="canonical" href="https://eomomentum.com/contact" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -94,18 +94,18 @@
       <p class="eyebrow">Contact</p>
       <h1>Let's talk about<br /><span class="grad-text">your business.</span></h1>
       <p class="hero-lead">
-        Book a 15-minute call. No pitch, just a straight conversation about where your business is
+        Send us a message. No pitch, just a straight answer about where your business is
         and whether the October 2026 cohort is the right move for you right now.
       </p>
     </div>
   </section>
 
-  <!-- ===== Booking ===== -->
+  <!-- ===== Contact form ===== -->
   <section class="section section-talk" id="book">
     <div class="container talk-grid">
       <div class="talk-copy">
         <p class="kicker">What we'll cover</p>
-        <h2>Fifteen minutes, no pressure</h2>
+        <h2>Send a message, get a straight answer</h2>
         <ul class="talk-points">
           <li>What the two years actually look like, month to month</li>
           <li>The qualifications, the investment, and the time it takes</li>
@@ -114,9 +114,6 @@
         <p class="talk-deadline">
           <strong>Applications close August 31, 2026</strong> for the cohort beginning in October.
         </p>
-        <a class="talk-link" href="https://calendar.app.google/ZG9A3rZGH8xY2ntP8" target="_blank" rel="noopener">
-          Prefer to open the calendar in a new tab? Pick a time here &rarr;
-        </a>
         <p class="talk-apply">
           Ready to apply instead?
           <a href="https://docs.google.com/forms/d/e/1FAIpQLScc60ljBa1LPO7eaSDCN3AgaU5EIokMF0Y_E-ma583C2_H-xA/viewform" target="_blank" rel="noopener">Start your application &rarr;</a>
@@ -126,14 +123,41 @@
       <div class="talk-embed">
         <div class="talk-embed-head">
           <span class="talk-dot" aria-hidden="true"></span>
-          <span>Pick a time that works</span>
+          <span>Send us a message</span>
         </div>
-        <iframe
-          class="talk-frame"
-          src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1z_iua3uh3KfJLEHdDjBX6LQMfJsFURR9OlEeUfQjWP8m4XtBxEay069fs7I6fMRkqS1ZVRT9k?gv=true"
-          title="Book a 15-minute call about EO Houston Momentum"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" autocomplete="name" required />
+            </div>
+            <div class="cf-field">
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-phone">Phone <span class="cf-optional">(optional)</span></label>
+              <input type="tel" id="cf-phone" name="phone" autocomplete="tel" />
+            </div>
+            <div class="cf-field">
+              <label for="cf-company">Company <span class="cf-optional">(optional)</span></label>
+              <input type="text" id="cf-company" name="company" autocomplete="organization" />
+            </div>
+          </div>
+          <div class="cf-field">
+            <label for="cf-message">What's on your mind?</label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+          </div>
+          <!-- honeypot, left blank by real visitors -->
+          <div class="cf-hp" aria-hidden="true">
+            <label for="cf-website">Website</label>
+            <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <button type="submit" class="btn btn-primary cf-submit" id="cfSubmit">Send message</button>
+          <div class="cf-msg" id="cfMsg" role="status"></div>
+        </form>
       </div>
     </div>
   </section>
@@ -170,5 +194,62 @@
     </div>
   </footer>
   <script src="main.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById('contactForm');
+      var msg = document.getElementById('cfMsg');
+      var submitBtn = document.getElementById('cfSubmit');
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        msg.className = 'cf-msg';
+        msg.textContent = '';
+
+        var payload = {
+          name: document.getElementById('cf-name').value.trim(),
+          email: document.getElementById('cf-email').value.trim(),
+          phone: document.getElementById('cf-phone').value.trim(),
+          company: document.getElementById('cf-company').value.trim(),
+          message: document.getElementById('cf-message').value.trim(),
+          website: document.getElementById('cf-website').value
+        };
+
+        if (!payload.name || !payload.email || !payload.message) {
+          msg.className = 'cf-msg err';
+          msg.textContent = 'Please fill in your name, email, and message.';
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (res) {
+            if (res.ok) {
+              msg.className = 'cf-msg ok';
+              msg.textContent = "Thanks, that's sent. We'll get back to you soon.";
+              form.reset();
+            } else {
+              msg.className = 'cf-msg err';
+              msg.textContent = (res.j && res.j.error) || 'Something went wrong. Please try again.';
+            }
+          })
+          .catch(function () {
+            msg.className = 'cf-msg err';
+            msg.textContent = 'Could not reach the server. Check your connection and try again.';
+          })
+          .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send message';
+          });
+      });
+    })();
+  </script>
 </body>
 </html>
