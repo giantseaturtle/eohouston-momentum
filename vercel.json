@@ -7,6 +7,11 @@
       "permanent": true
     },
     {
+      "source": "/rice-referral",
+      "destination": "/momentum-marketing-rice",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [{ "type": "host", "value": "www.eomomentum.com" }],
       "destination": "https://eomomentum.com/",

@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Momentum &mdash; social carousel for Al</title>
+  <title>Momentum &mdash; marketing package for Al</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/eo-favicon-32.png" />
   <style>
     :root {
@@ -23,17 +23,25 @@
       --line: #e6e8f0;
       --bg-soft: #f6f7fb;
       --grad: linear-gradient(135deg, #6D45D0 0%, #9B6BFF 100%);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --ok: #147a4d;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; }
     body {
-      background: #e4e6ef; font-family: 'Inter', -apple-system, sans-serif;
+      background: #e4e6ef; font-family: 'Inter', -apple-system, sans-serif; color: var(--body);
       display: flex; flex-direction: column; align-items: center; padding: 40px 16px 100px; gap: 28px;
     }
     .page-head { max-width: 700px; text-align: center; margin-bottom: 8px; }
-    .page-head h1 { font-family: 'Sora', sans-serif; color: var(--eo-navy); font-size: 22px; margin: 0 0 10px; }
+    .page-head h1 { font-family: 'Sora', sans-serif; color: var(--eo-navy); font-size: 24px; margin: 0 0 10px; }
     .page-head p { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 0 0 8px; }
     .page-head p:last-child { margin-bottom: 0; }
+
+    .section-label {
+      font-family: 'Sora', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--purple); text-align: center;
+    }
 
     .slide-label { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted); }
 
@@ -140,8 +148,11 @@
 
     body.export-mode { padding: 0; gap: 0; background: #fff; align-items: flex-start; }
     body.export-mode .page-head,
+    body.export-mode .section-label,
     body.export-mode .slide-label,
-    body.export-mode .downloads { display: none !important; }
+    body.export-mode .downloads,
+    body.export-mode .wrap-emails,
+    body.export-mode .page-footer { display: none !important; }
     body.export-mode .card { display: none; border-radius: 0; box-shadow: none; }
     body.export-mode .card.export-target { display: flex; }
 
@@ -159,14 +170,99 @@
       font-family: 'Sora', sans-serif; font-weight: 700; font-size: 15px; padding: 14px 22px;
       border-radius: 10px; text-decoration: none; margin-bottom: 16px;
     }
+
+    /* ===== email templates section ===== */
+    .wrap-emails { max-width: 760px; width: 100%; }
+
+    .emails-intro { text-align: center; max-width: 620px; margin: 0 auto 20px; }
+    .emails-intro p { font-size: 14.5px; line-height: 1.65; color: var(--body); margin: 10px 0 0; }
+
+    .howto {
+      background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--purple);
+      border-radius: var(--radius-sm); padding: 16px 20px; font-size: 13.5px; line-height: 1.7;
+    }
+    .howto strong { color: var(--ink); }
+    .howto ul { margin: 8px 0 0; padding-left: 18px; }
+    .howto li { margin-bottom: 4px; }
+
+    .flier-preview { margin-top: 20px; text-align: center; }
+    .flier-preview-label {
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
+    }
+    .flier-preview-link {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700;
+      color: #fff; background: var(--grad); padding: 11px 18px; border-radius: 999px; text-decoration: none;
+    }
+    .flier-preview-link:hover { filter: brightness(1.06); }
+
+    .angle {
+      background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+      margin-top: 20px; overflow: hidden;
+    }
+    .angle-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 16px 22px; border-bottom: 1px solid var(--line);
+    }
+    .angle-head h3 { font-family: 'Sora', sans-serif; font-size: 15px; margin: 0; color: var(--eo-navy); }
+    .angle-head .tag {
+      font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+      color: var(--purple); background: rgba(109,69,208,0.08); padding: 3px 9px; border-radius: 20px;
+    }
+    .angle-when { padding: 12px 22px 0; font-size: 12.5px; color: var(--muted); }
+
+    .email-preview { padding: 18px 22px 22px; font-size: 13.5px; line-height: 1.7; color: var(--ink); }
+    .email-preview > a { display: block; }
+    .email-header-photo { display: block; width: 100%; aspect-ratio: 2 / 1; object-fit: cover; object-position: center top; border-radius: 8px; margin-bottom: 16px; }
+    .email-class-photo { display: block; width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin: 4px 0 14px; }
+    .email-caption { font-size: 11px; color: var(--muted); font-style: italic; margin: -10px 0 14px; }
+    .email-subject {
+      font-weight: 700; color: var(--eo-navy); margin-bottom: 12px; padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .email-subject span { font-weight: 400; color: var(--muted); text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.06em; display: block; margin-bottom: 3px; }
+    .email-body p { margin: 0 0 12px; }
+    .email-body ul { margin: 0 0 12px; padding-left: 20px; }
+    .email-body li { margin-bottom: 4px; }
+    .email-body a { color: var(--purple); }
+
+    .angle-actions { display: flex; gap: 8px; padding: 0 22px 20px; align-items: center; justify-content: space-between; }
+    .angle-actions-left { display: flex; gap: 8px; align-items: center; }
+    .view-flier-link {
+      font-size: 12.5px; font-weight: 600; color: var(--purple); text-decoration: none;
+      white-space: nowrap;
+    }
+    .view-flier-link:hover { color: var(--violet); text-decoration: underline; }
+    .copy-btn {
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 12.5px; color: #fff; background: var(--grad);
+      border: none; border-radius: 999px; padding: 9px 16px; cursor: pointer;
+    }
+    .copy-btn:hover { filter: brightness(1.06); }
+    .copy-msg { font-size: 12px; color: var(--ok); display: none; }
+    .copy-msg.show { display: inline; }
+
+    .assets {
+      margin-top: 20px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 18px 22px;
+    }
+    .assets h3 { font-family: 'Sora', sans-serif; font-size: 14px; color: var(--eo-navy); margin: 0 0 10px; }
+    .assets ul { margin: 0; padding-left: 18px; font-size: 13px; }
+    .assets li { margin-bottom: 6px; }
+    .assets a { color: var(--purple); word-break: break-all; }
+
+    .page-footer {
+      max-width: 760px; width: 100%; text-align: center; padding-top: 18px; border-top: 1px solid var(--line);
+      font-size: 11.5px; color: var(--muted);
+    }
   </style>
 </head>
 <body>
   <div class="page-head">
-    <h1>Momentum social carousel &mdash; 7 slides</h1>
-    <p><strong>What this is:</strong> a ready-to-post LinkedIn/Instagram carousel for reaching Rice's Lilie Lab network and Al's own following. Same story as the flier and email angles, in a scrollable, photo-led format built for social feeds.</p>
-    <p>Square 1080&times;1080, real photos of the program and the people behind it. Download links and posting notes at the bottom of the page.</p>
+    <h1>Marketing package for Al's Rice outreach</h1>
+    <p><strong>What this is:</strong> everything for reaching Al's Rice and Lilie Lab contacts in one place. Lead with the social carousel below when posting or sharing a link, the four email templates further down are the backup for direct outreach.</p>
   </div>
+
+  <p class="section-label">Social media carousel</p>
 
   <!-- 1: COVER -->
   <p class="slide-label">Slide 1 of 7 &mdash; Cover</p>
@@ -319,6 +415,182 @@
     </div>
   </div>
 
+  <p class="section-label">Email templates (backup)</p>
+
+  <div class="wrap-emails">
+    <div class="emails-intro">
+      <p>Four angles on the same program, so Al can pick whichever fits how well he knows the
+        person he's writing to. Each one copies with formatting and images intact, ready to paste
+        straight into Gmail.</p>
+    </div>
+
+    <div class="howto">
+      <strong>How to use these:</strong> click "Copy email" on whichever angle fits, then paste
+      (Cmd/Ctrl + V) directly into a new Gmail draft, formatting, images, and links come along.
+      Swap in the real name, tweak a line or two to sound like you, and send. A few notes on
+      picking an angle:
+      <ul>
+        <li><strong>Rice Lilie Lab angle</strong>, best for Rice-affiliated contacts who'd want to hear the institutional connection first.</li>
+        <li><strong>Jackie Fisher angle</strong>, best for people who know Jackie or care about a founder's story more than credentials.</li>
+        <li><strong>EO Houston angle</strong>, best for someone who'd be motivated by the community and network they'd be joining, not just the coursework.</li>
+        <li><strong>Al Danto angle</strong>, written in your own voice, for people who know you personally and would respond to a direct note from you.</li>
+      </ul>
+      Mixing paragraphs from two angles into one email is fine, these are starting points, not scripts.
+      Reference or attach the one-page flier below with any of these.
+    </div>
+
+    <div class="flier-preview">
+      <p class="flier-preview-label">The attachment</p>
+      <a class="flier-preview-link" href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener">Open the flier &rarr;</a>
+    </div>
+
+    <!-- ================= RICE LILIE LAB ANGLE ================= -->
+    <div class="angle" id="angle-lilie">
+      <div class="angle-head">
+        <h3>Rice Lilie Lab angle</h3>
+        <span class="tag">Institutional</span>
+      </div>
+      <p class="angle-when">Leads with the Lilie Lab connection, for Rice-affiliated contacts who'd want that context first.</p>
+      <div class="email-preview">
+        <a href="https://eomomentum.com" target="_blank" rel="noopener"><img class="email-header-photo" src="https://eomomentum.com/assets/og-image.png" alt="EO Houston Momentum: Stop grinding. Start growing." /></a>
+        <div class="email-subject"><span>Subject</span>A program built by Rice minds, for Houston's next $1M founders</div>
+        <div class="email-body">
+          <p>Hi [Name],</p>
+          <p>Something the Lilie Lab community should know about: EO Houston Momentum, a two-year accelerator for Houston business owners ready to scale past $1 million in revenue.</p>
+          <p>The curriculum was refined by Al Danto, a seasoned entrepreneur who exited his own company and now a Senior Lecturer in Entrepreneurship at Rice, with input from <strong>Jackie Fisher</strong>, a Rice alum and founder herself, built around real experience shared by entrepreneurs who've actually scaled past $1 million, with direct access to EO Houston's network of 200+ businesses who've done it. It's not a Rice program and it doesn't require a Rice degree to join.</p>
+          <img class="email-class-photo" src="https://eomomentum.com/assets/photos/classroom.jpg" alt="A Momentum class in session" />
+          <p class="email-caption">A Momentum class in session.</p>
+          <p>Momentum is for owners or co-founders with:</p>
+          <ul>
+            <li>Yearly revenue over $250,000</li>
+            <li>A drive to build past $1 million in under two years</li>
+          </ul>
+          <p>Applications for the cohort beginning October 2026 close September 15, 2026.</p>
+          <p>More at <a href="https://eomomentum.com">eomomentum.com</a>, or learn about the chapter at <a href="https://eohouston.com">eohouston.com</a></p>
+          <p>[Your name]</p>
+        </div>
+      </div>
+      <div class="angle-actions">
+        <div class="angle-actions-left">
+          <button class="copy-btn" data-target="angle-lilie">Copy email</button>
+          <span class="copy-msg">Copied!</span>
+        </div>
+        <a class="view-flier-link" href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener">View &amp; download flier &rarr;</a>
+      </div>
+    </div>
+
+    <!-- ================= JACKIE FISHER ANGLE ================= -->
+    <div class="angle" id="angle-jackie">
+      <div class="angle-head">
+        <h3>Jackie Fisher angle</h3>
+        <span class="tag">Founder story</span>
+      </div>
+      <p class="angle-when">Leads with a fellow Rice grad who's now a real operator, and names EO Houston so readers know who's actually behind Momentum.</p>
+      <div class="email-preview">
+        <a href="https://eomomentum.com" target="_blank" rel="noopener"><img class="email-header-photo" src="https://eomomentum.com/assets/og-image.png" alt="EO Houston Momentum: Stop grinding. Start growing." /></a>
+        <div class="email-subject"><span>Subject</span>A program a fellow Rice grad helped shape</div>
+        <div class="email-body">
+          <p>Hi [Name],</p>
+          <p>I wanted to make sure you knew about EO Houston Momentum, a two-year accelerator for Houston business owners ready to break past $1 million in revenue.</p>
+          <p>Momentum is run by <strong>Entrepreneurs' Organization Houston</strong>, a nonprofit connecting you with 200+ Houston businesses that have already scaled past $1M, part of a global network of 20,000+ members in 224 chapters worldwide. One of the people who helped shape the curriculum is <strong>Jackie Fisher</strong>, a Rice alum who's since built and run her own company, 3 Men Movers, here in Houston. She gave input alongside Al Danto, a seasoned entrepreneur who exited his own company and refined the curriculum, so it reflects how real operators actually grow a business, not just theory.</p>
+          <img class="email-class-photo" src="https://eomomentum.com/assets/photos/classroom.jpg" alt="A Momentum class in session" />
+          <p class="email-caption">A Momentum class in session.</p>
+          <p>Momentum is for owners or co-founders with:</p>
+          <ul>
+            <li>Yearly revenue over $250,000</li>
+            <li>A drive to build past $1 million in under two years</li>
+          </ul>
+          <p>Applications for the cohort beginning October 2026 close September 15, 2026.</p>
+          <p>Take a look: <a href="https://eomomentum.com">eomomentum.com</a>, or learn about the chapter at <a href="https://eohouston.com">eohouston.com</a></p>
+          <p>[Your name]</p>
+        </div>
+      </div>
+      <div class="angle-actions">
+        <div class="angle-actions-left">
+          <button class="copy-btn" data-target="angle-jackie">Copy email</button>
+          <span class="copy-msg">Copied!</span>
+        </div>
+        <a class="view-flier-link" href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener">View &amp; download flier &rarr;</a>
+      </div>
+    </div>
+
+    <!-- ================= EO HOUSTON ANGLE ================= -->
+    <div class="angle" id="angle-eohouston">
+      <div class="angle-head">
+        <h3>EO Houston angle</h3>
+        <span class="tag">Community &amp; prestige</span>
+      </div>
+      <p class="angle-when">Leads with the on-ramp into Entrepreneurs' Organization Houston itself.</p>
+      <div class="email-preview">
+        <a href="https://eomomentum.com" target="_blank" rel="noopener"><img class="email-header-photo" src="https://eomomentum.com/assets/og-image.png" alt="EO Houston Momentum: Stop grinding. Start growing." /></a>
+        <div class="email-subject"><span>Subject</span>The on-ramp into Houston's top entrepreneur community</div>
+        <div class="email-body">
+          <p>Hi [Name],</p>
+          <p>If you know a Houston founder doing well, over $250,000 in revenue and hungry to grow past $1 million, I wanted to flag EO Houston Momentum.</p>
+          <p>Momentum is a two-year accelerator that also works as the on-ramp into <strong>Entrepreneurs' Organization Houston</strong>, a nonprofit connecting you with 200+ Houston businesses that have already scaled past $1M. It's part of a global network of 20,000+ entrepreneurs across 224 chapters worldwide. The curriculum itself was refined by Al Danto, a seasoned entrepreneur who exited his own company and is now a Senior Lecturer in Entrepreneurship at Rice, with input from Jackie Fisher, a Rice alum.</p>
+          <p>Applications for the cohort beginning October 2026 close September 15, 2026.</p>
+          <p>Learn more: <a href="https://eomomentum.com">eomomentum.com</a>, or about the chapter itself at <a href="https://eohouston.com">eohouston.com</a></p>
+          <p>[Your name]</p>
+        </div>
+      </div>
+      <div class="angle-actions">
+        <div class="angle-actions-left">
+          <button class="copy-btn" data-target="angle-eohouston">Copy email</button>
+          <span class="copy-msg">Copied!</span>
+        </div>
+        <a class="view-flier-link" href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener">View &amp; download flier &rarr;</a>
+      </div>
+    </div>
+
+    <!-- ================= AL DANTO ANGLE ================= -->
+    <div class="angle" id="angle-al">
+      <div class="angle-head">
+        <h3>Al Danto angle</h3>
+        <span class="tag">Personal note</span>
+      </div>
+      <p class="angle-when">Written in Al's own voice, for contacts who know him directly.</p>
+      <div class="email-preview">
+        <a href="https://eomomentum.com" target="_blank" rel="noopener"><img class="email-header-photo" src="https://eomomentum.com/assets/og-image.png" alt="EO Houston Momentum: Stop grinding. Start growing." /></a>
+        <div class="email-subject"><span>Subject</span>A Houston accelerator I helped build, thought of you</div>
+        <div class="email-body">
+          <p>Hi [Name],</p>
+          <p>I wanted to share something I've been part of building: EO Houston Momentum, a two-year accelerator for Houston business owners ready to break past $1 million in revenue, run by Entrepreneurs' Organization Houston, a nonprofit that's part of a global network of 20,000+ entrepreneurs in 224 chapters.</p>
+          <p>After exiting my own company, I refined the curriculum with input from <strong>Jackie Fisher</strong>, a Rice alum and founder herself. It's built around real experience shared by entrepreneurs who've actually scaled past $1 million, with direct access to EO Houston's network of 200+ businesses who've done it. It's not a Rice program and it doesn't require a Rice degree to join. It's built for real operators, with 8 months of classes a year, a confidential peer Forum that meets monthly year-round, and a community of founders who actually show up for each other.</p>
+          <p>Momentum is for owners or co-founders with:</p>
+          <ul>
+            <li>Yearly revenue over $250,000</li>
+            <li>A drive to build past $1 million in under two years</li>
+          </ul>
+          <p>Applications for the cohort beginning October 2026 close September 15, 2026.</p>
+          <p>If this sounds like you, or you know a Houston founder who's ready, take a look: <a href="https://eomomentum.com">eomomentum.com</a>, or learn about the chapter at <a href="https://eohouston.com">eohouston.com</a></p>
+          <p>Happy to answer questions directly.</p>
+          <p>Al Danto<br />Program Director, EO Houston Momentum<br />Senior Lecturer in Entrepreneurship, Rice University</p>
+        </div>
+      </div>
+      <div class="angle-actions">
+        <div class="angle-actions-left">
+          <button class="copy-btn" data-target="angle-al">Copy email</button>
+          <span class="copy-msg">Copied!</span>
+        </div>
+        <a class="view-flier-link" href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener">View &amp; download flier &rarr;</a>
+      </div>
+    </div>
+
+    <div class="assets">
+      <h3>Image assets used above</h3>
+      <ul>
+        <li>Header banner: <a href="https://eomomentum.com/assets/og-image.png" target="_blank" rel="noopener">eomomentum.com/assets/og-image.png</a></li>
+        <li>Class photo: <a href="https://eomomentum.com/assets/photos/classroom.jpg" target="_blank" rel="noopener">eomomentum.com/assets/photos/classroom.jpg</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    This page is not linked from the site and is excluded from search indexing. Momentum is an
+    independent program of EO Houston, a chapter of the Entrepreneurs&rsquo; Organization. Rice
+    University faculty and alumni participate as instructors and coaches in their individual capacities.
+  </footer>
+
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
@@ -328,6 +600,40 @@
       var target = document.getElementById('slide-' + exportSlide);
       if (target) target.classList.add('export-target');
     })();
+
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var container = document.getElementById(btn.dataset.target).querySelector('.email-preview');
+        var html = container.innerHTML;
+        var text = container.innerText;
+        var msg = btn.nextElementSibling;
+
+        function flash() {
+          msg.classList.add('show');
+          setTimeout(function () { msg.classList.remove('show'); }, 2500);
+        }
+
+        navigator.clipboard.write([
+          new ClipboardItem({
+            'text/html': new Blob([html], { type: 'text/html' }),
+            'text/plain': new Blob([text], { type: 'text/plain' })
+          })
+        ]).then(flash).catch(function () {
+          try {
+            var range = document.createRange();
+            range.selectNodeContents(container);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            document.execCommand('copy');
+            sel.removeAllRanges();
+            flash();
+          } catch (e) {
+            alert('Select the email text manually and press Cmd/Ctrl+C to copy.');
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
