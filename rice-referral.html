@@ -53,25 +53,11 @@
       font-family: 'Sora', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
     }
-    .flier-preview-frame {
-      display: block; position: relative; width: 100%; height: 460px; overflow: hidden;
-      border-radius: var(--radius-sm); border: 1px solid var(--line); background: #d8dae6;
-      box-shadow: 0 10px 30px -14px rgba(10,31,68,0.3);
+    .flier-preview-link {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700;
+      color: #fff; background: var(--grad); padding: 11px 18px; border-radius: 999px; text-decoration: none;
     }
-    .flier-preview-frame iframe {
-      position: absolute; top: 0; left: 0; width: 900px; height: 1900px; border: 0;
-      transform: scale(0.46); transform-origin: top left; pointer-events: none;
-    }
-    .flier-preview-hint {
-      position: absolute; bottom: 12px; right: 14px; background: var(--eo-navy); color: #fff;
-      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 12px; padding: 7px 14px;
-      border-radius: 999px; opacity: 0.94;
-    }
-    .flier-preview-download {
-      display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--purple);
-      text-decoration: none;
-    }
-    .flier-preview-download:hover { color: var(--violet); text-decoration: underline; }
+    .flier-preview-link:hover { filter: brightness(1.06); }
 
     .angle {
       background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
@@ -165,16 +151,12 @@
         <li><strong>Al Danto angle</strong>, written in your own voice, for people who know you personally and would respond to a direct note from you.</li>
       </ul>
       Mixing paragraphs from two angles into one email is fine, these are starting points, not scripts.
-Attach <a href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener">the one-page flier</a> to any of these before sending. Preview it, then use your browser's Print &rarr; Save as PDF to download it.
+      Reference or attach the one-page flier below with any of these.
     </div>
 
     <div class="flier-preview">
       <p class="flier-preview-label">The attachment</p>
-      <a class="flier-preview-frame" href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener" aria-label="Open the full flier in a new tab">
-        <iframe src="https://eomomentum.com/rice-flier" title="EO Houston Momentum flier preview" tabindex="-1"></iframe>
-        <span class="flier-preview-hint">Click to open full size &rarr;</span>
-      </a>
-      <a class="flier-preview-download" href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener">Open &amp; download flier (Print &rarr; Save as PDF) &rarr;</a>
+      <a class="flier-preview-link" href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener">Open the flier &rarr;</a>
     </div>
   </header>
 
