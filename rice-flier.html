@@ -159,6 +159,38 @@
       font-size: 10.5px; line-height: 1.6; color: var(--muted);
     }
     footer .url { font-family: 'Sora', sans-serif; font-weight: 700; color: var(--eo-navy); font-size: 12.5px; }
+
+    @media print {
+      @page { size: letter; margin: 0.3in; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+      body { background: #fff; padding: 0; display: block; }
+      .sheet { width: 100%; max-width: 100%; box-shadow: none; border-radius: 0; }
+      .feature-photo { display: none; }
+      .hero { padding: 17px 30px 15px; }
+      .headline { font-size: 32px; margin-bottom: 8px; }
+      .hero-sub { font-size: 12.5px; }
+      .credibility { margin-top: 8px; padding: 10px 14px; }
+      .credibility p { font-size: 11.5px; }
+      .content { padding: 13px 30px 4px; }
+      .lede { font-size: 12.5px; margin-bottom: 12px; }
+      .stats { margin-bottom: 11px; }
+      .stats div { padding: 9px 8px; }
+      .stat-num { font-size: 16px; }
+      .grid2 { margin-bottom: 11px; gap: 12px; }
+      .card { padding: 11px 14px; }
+      .card h3 { margin-bottom: 6px; }
+      .card li { padding: 4px 0 4px 16px; font-size: 12px; }
+      .onramp { padding: 11px; margin-bottom: 14px; gap: 12px; }
+      .onramp img { width: 58px; height: 58px; }
+      .onramp .txt p { font-size: 11.5px; }
+      .cta-row { padding: 13px 18px; margin: 3px 0 12px; }
+      footer { padding: 7px 30px 10px; }
+      .hero, .card, .stats, .grid2, .onramp, .cta-row { break-inside: avoid; }
+    }
   </style>
 </head>
 <body>
@@ -196,8 +228,9 @@
           <strong>Shaped by two Rice minds:</strong> the curriculum was built by <strong>Jackie Fisher</strong>,
           a Rice graduate program alum, working alongside <strong>Al Danto</strong>, Momentum's Program
           Director and a Senior Lecturer in Entrepreneurship at Rice, in partnership with Entrepreneurs'
-          Organization Houston. It's built for entrepreneurs who want the rigor of a Rice-caliber program
-          without needing a Rice degree to get it.
+          Organization Houston. It's built around real experience shared by entrepreneurs who've actually
+          scaled past $1 million, with direct access to EO Houston's network of 200+ businesses who've
+          done it.
         </p>
       </div>
     </div>
@@ -248,9 +281,9 @@
           <h3>Where Momentum leads</h3>
           <p>
             Graduate Momentum and you don&rsquo;t just walk away with a stronger business. You step into
-            <strong>Entrepreneurs&rsquo; Organization Houston</strong>, a nonprofit built to help Houston
-            entrepreneurs grow, and the city&rsquo;s most established community of $1M+ founders, part of
-            a global network of 20,000+ entrepreneurs in 224 chapters worldwide. Momentum is the on-ramp:
+            <strong>Entrepreneurs&rsquo; Organization Houston</strong>, a nonprofit connecting you with
+            200+ Houston businesses that have already scaled past $1M, part of a global network of
+            20,000+ entrepreneurs in 224 chapters worldwide. Momentum is the on-ramp:
             <a href="https://eohouston.com">eohouston.com</a>
           </p>
         </div>
