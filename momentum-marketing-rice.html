@@ -69,6 +69,10 @@
     }
     .card.bleed .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; padding: 56px; }
     .card.bleed .kicker { color: var(--cyan); }
+    .card.bleed .logo-row {
+      background: rgba(6,21,51,0.6); padding: 10px 22px 10px 12px; border-radius: 999px;
+      align-self: flex-start; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
 
     .cover-headline {
       font-family: 'Sora', sans-serif; font-weight: 800; font-size: 88px; line-height: 1.04;
@@ -150,6 +154,11 @@
       background: var(--grad); color: #fff; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px;
       padding: 14px 10px; border-radius: 10px; text-decoration: none;
     }
+    .download-all {
+      display: inline-flex; align-items: center; gap: 10px; background: var(--eo-navy); color: #fff;
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 15px; padding: 14px 22px;
+      border-radius: 10px; text-decoration: none; margin-bottom: 16px;
+    }
   </style>
 </head>
 <body>
@@ -162,7 +171,7 @@
   <!-- 1: COVER -->
   <p class="slide-label">Slide 1 of 7 &mdash; Cover</p>
   <div class="card bleed" id="slide-1">
-    <img class="bg-photo" src="https://eomomentum.com/assets/photos/classroom.jpg" alt="A Momentum class in session" style="object-position: center 35%;" />
+    <img class="bg-photo" src="https://eomomentum.com/assets/photos/connect-lounge.jpg" alt="Momentum members networking" style="object-position: center 20%;" />
     <div class="scrim"></div>
     <div class="content">
       <div class="logo-row">
@@ -178,7 +187,7 @@
       <div style="flex:1"></div>
       <p class="kicker">For Rice entrepreneurs</p>
       <h1 class="cover-headline">Stop grinding.<br /><span class="grad">Start growing.</span></h1>
-      <p class="cover-sub">A two-year Houston accelerator built by two Rice minds.</p>
+      <p class="cover-sub">A two-year Houston accelerator, in partnership with EO Houston.</p>
       <div class="swipe-hint">Swipe &rarr;</div>
     </div>
   </div>
@@ -186,21 +195,22 @@
   <!-- 2: CREDIBILITY -->
   <p class="slide-label">Slide 2 of 7 &mdash; Who built it</p>
   <div class="card light" id="slide-2">
-    <p class="kicker">Built by two Rice minds</p>
-    <h2 class="card-title">Not theory. Real operators.</h2>
+    <p class="kicker">Who&rsquo;s behind Momentum</p>
+    <h2 class="card-title">Real experience, not theory.</h2>
+    <p class="card-body" style="font-size: 22px; margin: 14px 0 0;">Al Danto, a seasoned entrepreneur who exited his own company, refined the curriculum with input from Jackie Fisher, a Rice alum and founder herself.</p>
     <div class="people-row">
+      <div class="person-tile">
+        <img src="https://eomomentum.com/assets/team/al-danto.png" alt="Al Danto" style="object-position: center 20%;" />
+        <div class="cap">
+          <div class="pn">Al Danto</div>
+          <div class="pr">Exited founder, Partner at Exit Advisors, Rice Sr. Lecturer</div>
+        </div>
+      </div>
       <div class="person-tile">
         <img src="https://eomomentum.com/assets/team/jackie.jpg" alt="Jackie Fisher" />
         <div class="cap">
           <div class="pn">Jackie Fisher</div>
           <div class="pr">Rice alum, Owner of 3 Men Movers</div>
-        </div>
-      </div>
-      <div class="person-tile">
-        <img src="https://eomomentum.com/assets/team/al-danto.png" alt="Al Danto" style="object-position: center 20%;" />
-        <div class="cap">
-          <div class="pn">Al Danto</div>
-          <div class="pr">Program Director &amp; Sr. Lecturer, Rice</div>
         </div>
       </div>
     </div>
@@ -211,8 +221,9 @@
   <div class="card light" id="slide-3">
     <p class="kicker">What is Momentum?</p>
     <h2 class="card-title">Not a seminar. Not a pitch club.</h2>
+    <p class="card-body" style="font-size: 22px; margin: 14px 0 0;">Run in partnership with Entrepreneurs&rsquo; Organization Houston.</p>
     <div class="feature-photo">
-      <img src="https://eomomentum.com/assets/photos/retreat-forum.jpg" alt="A Momentum peer Forum group meeting" />
+      <img src="https://eomomentum.com/assets/photos/classroom.jpg" alt="A Momentum class in session" style="object-position: center 30%;" />
     </div>
     <div class="stats-row">
       <div><span class="n">2-Year</span><span class="l">Program</span></div>
@@ -240,7 +251,7 @@
   <!-- 5: THE REAL VALUE -->
   <p class="slide-label">Slide 5 of 7 &mdash; The real unlock</p>
   <div class="card bleed" id="slide-5">
-    <img class="bg-photo" src="https://eomomentum.com/assets/photos/connect-lounge.jpg" alt="Momentum members networking" style="object-position: center 15%;" />
+    <img class="bg-photo" src="https://eomomentum.com/assets/photos/gala-group.jpg" alt="Momentum and EO Houston members" style="object-position: center 25%;" />
     <div class="scrim"></div>
     <div class="content" style="justify-content:flex-end;">
       <p class="kicker">The real unlock</p>
@@ -253,7 +264,7 @@
   <p class="slide-label">Slide 6 of 7 &mdash; Key dates</p>
   <div class="card accent" id="slide-6">
     <div class="photo-band">
-      <img src="https://eomomentum.com/assets/photos/gala-group.jpg" alt="Momentum and EO Houston members" style="object-position: center 30%;" />
+      <img src="https://eomomentum.com/assets/photos/social-cornhole.jpg" alt="Momentum and EO Houston members at a social event" style="object-position: center 25%;" />
     </div>
     <div class="accent-content">
       <p class="kicker">Key dates</p>
@@ -269,7 +280,7 @@
   <!-- 7: CTA -->
   <p class="slide-label">Slide 7 of 7 &mdash; Apply</p>
   <div class="card bleed" id="slide-7">
-    <img class="bg-photo" src="https://eomomentum.com/assets/photos/social-cornhole.jpg" alt="Momentum and EO Houston members at a social event" style="object-position: center 25%;" />
+    <img class="bg-photo" src="https://eomomentum.com/assets/photos/gala-four.jpg" alt="Momentum and EO Houston members" style="object-position: center 30%;" />
     <div class="scrim"></div>
     <div class="content" style="justify-content:flex-end;">
       <div class="logo-row" style="margin-bottom:36px;">
@@ -290,9 +301,12 @@
 
   <div class="downloads">
     <h2>Post this as a carousel</h2>
+    <p style="font-size:14px; color:var(--muted); line-height:1.6; margin:0 0 16px;">These 7 images are meant to be posted together, as one carousel, not individually.</p>
+    <a class="download-all" href="assets/carousel/momentum-carousel-slides.zip" download>Download all 7 (ZIP) &darr;</a>
     <ol>
       <li><strong>LinkedIn:</strong> start a post, click the image icon, and select all 7 files at once (or use "Create a carousel" if offered) &mdash; LinkedIn keeps the order you select them in, so pick slide-1 through slide-7 in order.</li>
       <li><strong>Instagram:</strong> tap the multi-photo icon when creating a post, add all 7 in order, then post as a carousel.</li>
+      <li><strong>Facebook:</strong> start a post, click "Photo/Video," select all 7 in order &mdash; Facebook will post them as a swipeable album.</li>
     </ol>
     <div class="download-grid">
       <a href="assets/carousel/slide-1.png" download>Slide 1<br />Cover</a>
