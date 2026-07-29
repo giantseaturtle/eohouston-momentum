@@ -44,6 +44,10 @@ Sender address defaults to Resend's shared `onboarding@resend.dev`, which Resend
 
 The same form is also embedded directly on the homepage as section `#contact` (between Admissions and the final CTA) so people don't have to leave the page to ask a question - better for conversions than routing them to a separate page. Both instances share the exact same field IDs (`contactForm`, `cf-name`, `cf-email`, etc.) and are wired up by one handler in `main.js`, so a form-handling change only needs to happen once. The homepage nav, hero, admissions, final CTA, and footer all link to `#contact` rather than `/contact` now; the standalone `/contact` page still works (for direct traffic, external links, search results) but isn't linked from within the homepage anymore.
 
+## 404 page
+
+`404.html` at the repo root is Vercel's automatic fallback for any unmatched path on a static (no-framework) deployment - no routing config needed, and the real 404 status code is preserved. It carries its own copy of the header/footer (same pattern as `contact.html`) and fires a `page_not_found` GA4 event with `path` and `referrer` params, so dead-link traffic shows up in GA4 going forward - the site has no functions, so `vercel logs` has nothing to show for a static deploy, at any time window.
+
 ## Analytics
 
 GA4 tag `G-NMEJ7BV822` is loaded in the `<head>` of `index.html` and `contact.html` (not `admin.html`, which is internal-only). Two custom events, both fired from `main.js`:
