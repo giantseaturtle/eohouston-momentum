@@ -25,6 +25,14 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/eo-favicon-32.png" />
   <link rel="apple-touch-icon" href="assets/eo-apple-touch.png" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMEJ7BV822"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMEJ7BV822');
+  </script>
 </head>
 <body>
 
@@ -65,7 +73,7 @@
       </nav>
 
       <a class="header-login" href="https://eohouston.chapterpro.com/index.php?frontend=1" target="_blank" rel="noopener">Member Login</a>
-      <a class="btn btn-primary header-cta" href="/#admissions">Apply Now</a>
+      <a class="btn btn-primary header-cta" href="/#admissions" data-ga-apply="header_nav">Apply Now</a>
 
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -83,7 +91,7 @@
       <a href="/contact" aria-current="page">Contact</a>
       <a href="https://eohouston.com" target="_blank" rel="noopener">EO Houston &#8599;</a>
       <a href="https://eohouston.chapterpro.com/index.php?frontend=1" target="_blank" rel="noopener">Member Login</a>
-      <a href="/#admissions" class="btn btn-primary">Apply Now</a>
+      <a href="/#admissions" class="btn btn-primary" data-ga-apply="mobile_nav">Apply Now</a>
     </div>
   </header>
   <!-- ===== Page hero ===== -->
@@ -116,7 +124,7 @@
         </p>
         <p class="talk-apply">
           Ready to apply instead?
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScc60ljBa1LPO7eaSDCN3AgaU5EIokMF0Y_E-ma583C2_H-xA/viewform" target="_blank" rel="noopener">Start your application &rarr;</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScc60ljBa1LPO7eaSDCN3AgaU5EIokMF0Y_E-ma583C2_H-xA/viewform" target="_blank" rel="noopener" data-ga-apply="contact_page">Start your application &rarr;</a>
         </p>
       </div>
 
@@ -194,62 +202,5 @@
     </div>
   </footer>
   <script src="main.js"></script>
-  <script>
-    (function () {
-      var form = document.getElementById('contactForm');
-      var msg = document.getElementById('cfMsg');
-      var submitBtn = document.getElementById('cfSubmit');
-      if (!form) return;
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        msg.className = 'cf-msg';
-        msg.textContent = '';
-
-        var payload = {
-          name: document.getElementById('cf-name').value.trim(),
-          email: document.getElementById('cf-email').value.trim(),
-          phone: document.getElementById('cf-phone').value.trim(),
-          company: document.getElementById('cf-company').value.trim(),
-          message: document.getElementById('cf-message').value.trim(),
-          website: document.getElementById('cf-website').value
-        };
-
-        if (!payload.name || !payload.email || !payload.company || !payload.message) {
-          msg.className = 'cf-msg err';
-          msg.textContent = 'Please fill in your name, email, company name, and message.';
-          return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending…';
-
-        fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        })
-          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-          .then(function (res) {
-            if (res.ok) {
-              msg.className = 'cf-msg ok';
-              msg.textContent = "Thanks, that's sent. We'll get back to you soon.";
-              form.reset();
-            } else {
-              msg.className = 'cf-msg err';
-              msg.textContent = (res.j && res.j.error) || 'Something went wrong. Please try again.';
-            }
-          })
-          .catch(function () {
-            msg.className = 'cf-msg err';
-            msg.textContent = 'Could not reach the server. Check your connection and try again.';
-          })
-          .finally(function () {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Send message';
-          });
-      });
-    })();
-  </script>
 </body>
 </html>

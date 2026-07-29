@@ -23,6 +23,14 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/eo-favicon-32.png" />
   <link rel="apple-touch-icon" href="assets/eo-apple-touch.png" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMEJ7BV822"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMEJ7BV822');
+  </script>
 </head>
 <body>
 
@@ -59,11 +67,11 @@
         <a href="#invest">Qualifications</a>
         <a href="#about">About</a>
         <a href="#faq">FAQ</a>
-        <a href="/contact">Contact</a>
+        <a href="#contact">Contact</a>
       </nav>
 
       <a class="header-login" href="https://eohouston.chapterpro.com/index.php?frontend=1" target="_blank" rel="noopener">Member Login</a>
-      <a class="btn btn-primary header-cta" href="#admissions">Apply Now</a>
+      <a class="btn btn-primary header-cta" href="#admissions" data-ga-apply="header_nav">Apply Now</a>
 
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -78,10 +86,10 @@
       <a href="#eo">The EO Network</a>
       <a href="#partners">Partners</a>
       <a href="#faq">FAQ</a>
-      <a href="/contact">Contact</a>
+      <a href="#contact">Contact</a>
       <a href="https://eohouston.com" target="_blank" rel="noopener">EO Houston &#8599;</a>
       <a href="https://eohouston.chapterpro.com/index.php?frontend=1" target="_blank" rel="noopener">Member Login</a>
-      <a href="#admissions" class="btn btn-primary">Apply Now</a>
+      <a href="#admissions" class="btn btn-primary" data-ga-apply="mobile_nav">Apply Now</a>
     </div>
   </header>
 
@@ -99,8 +107,8 @@
         <strong>$1 million in revenue in under two years.</strong>
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" href="#admissions">Apply for Momentum</a>
-        <a class="btn btn-ghost btn-lg" href="/contact">Contact us to learn more</a>
+        <a class="btn btn-primary btn-lg" href="#admissions" data-ga-apply="hero">Apply for Momentum</a>
+        <a class="btn btn-ghost btn-lg" href="#contact">Contact us to learn more</a>
       </div>
       <a class="hero-webinar" id="hero-webinar" href="#" target="_blank" rel="noopener" hidden>
         <span class="hw-tag">Free webinar</span>
@@ -588,10 +596,10 @@
         before the October start. The next cohort begins in October 2027.
       </p>
 
-      <a class="btn btn-primary btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLScc60ljBa1LPO7eaSDCN3AgaU5EIokMF0Y_E-ma583C2_H-xA/viewform" target="_blank" rel="noopener">Apply for the October 2026 cohort</a>
+      <a class="btn btn-primary btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLScc60ljBa1LPO7eaSDCN3AgaU5EIokMF0Y_E-ma583C2_H-xA/viewform" target="_blank" rel="noopener" data-ga-apply="admissions_section">Apply for the October 2026 cohort</a>
 
       <p class="admit-talk">
-        Have questions first? <a href="/contact">Contact us</a> and send us a message.
+        Have questions first? <a href="#contact">Contact us</a> and send us a message.
       </p>
 
       <p class="admit-webinar" id="admit-webinar" hidden>
@@ -602,6 +610,68 @@
     </div>
   </section>
 
+  <!-- ===== Contact form ===== -->
+  <section class="section section-talk" id="contact">
+    <div class="container talk-grid">
+      <div class="talk-copy">
+        <p class="kicker">Not ready to apply?</p>
+        <h2>Send us a message</h2>
+        <ul class="talk-points">
+          <li>What the two years actually look like, month to month</li>
+          <li>The qualifications, the investment, and the time it takes</li>
+          <li>Whether to apply for this cohort or the next one</li>
+        </ul>
+        <p class="talk-deadline">
+          <strong>Applications close August 31, 2026</strong> for the cohort beginning in October.
+        </p>
+        <p class="talk-apply">
+          Ready to apply instead?
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScc60ljBa1LPO7eaSDCN3AgaU5EIokMF0Y_E-ma583C2_H-xA/viewform" target="_blank" rel="noopener" data-ga-apply="contact_section">Start your application &rarr;</a>
+        </p>
+      </div>
+
+      <div class="talk-embed">
+        <div class="talk-embed-head">
+          <span class="talk-dot" aria-hidden="true"></span>
+          <span>Send us a message</span>
+        </div>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" autocomplete="name" required />
+            </div>
+            <div class="cf-field">
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-phone">Phone <span class="cf-optional">(optional)</span></label>
+              <input type="tel" id="cf-phone" name="phone" autocomplete="tel" />
+            </div>
+            <div class="cf-field">
+              <label for="cf-company">Company Name</label>
+              <input type="text" id="cf-company" name="company" autocomplete="organization" required />
+            </div>
+          </div>
+          <div class="cf-field">
+            <label for="cf-message">Tell us about your business and what you'd like to know</label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+          </div>
+          <!-- honeypot, left blank by real visitors -->
+          <div class="cf-hp" aria-hidden="true">
+            <label for="cf-website">Website</label>
+            <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <button type="submit" class="btn btn-primary cf-submit" id="cfSubmit">Send message</button>
+          <div class="cf-msg" id="cfMsg" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Final CTA ===== -->
   <section class="cta" id="apply">
     <div class="cta-glow" aria-hidden="true"></div>
@@ -609,8 +679,8 @@
     <div class="container center">
       <h2 class="cta-title">Apply for Momentum today</h2>
       <p class="cta-sub">Build the business and life you've been chasing.</p>
-      <a class="btn btn-primary btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLScc60ljBa1LPO7eaSDCN3AgaU5EIokMF0Y_E-ma583C2_H-xA/viewform" target="_blank" rel="noopener">Start your application</a>
-      <p class="cta-alt">Applications close August 31, 2026. Not ready? <a href="/contact">Contact us first</a>.</p>
+      <a class="btn btn-primary btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLScc60ljBa1LPO7eaSDCN3AgaU5EIokMF0Y_E-ma583C2_H-xA/viewform" target="_blank" rel="noopener" data-ga-apply="final_cta">Start your application</a>
+      <p class="cta-alt">Applications close August 31, 2026. Not ready? <a href="#contact">Contact us first</a>.</p>
       <p class="cta-tag">Stop grinding. Start growing.</p>
     </div>
   </section>
@@ -636,7 +706,7 @@
         <a href="#about">About</a>
         <a href="#eo">The EO Network</a>
         <a href="#faq">FAQ</a>
-        <a href="/contact">Contact</a>
+        <a href="#contact">Contact</a>
         <a href="#admissions">Apply</a>
         <a href="https://eohouston.com" target="_blank" rel="noopener">EO Houston &#8599;</a>
         <a href="https://www.eonetwork.org" target="_blank" rel="noopener">EO Global &#8599;</a>

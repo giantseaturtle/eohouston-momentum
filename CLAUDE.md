@@ -42,7 +42,14 @@ Sender address defaults to Resend's shared `onboarding@resend.dev`, which Resend
 
 `contact.html` carries its own copy of the header and footer. Any nav, brand, or footer change on the homepage has to be mirrored there by hand, with the anchors written as `/#program`-style absolute links.
 
-`/contact` is linked from the homepage hero, admissions, final CTA, nav, mobile nav, and footer.
+The same form is also embedded directly on the homepage as section `#contact` (between Admissions and the final CTA) so people don't have to leave the page to ask a question - better for conversions than routing them to a separate page. Both instances share the exact same field IDs (`contactForm`, `cf-name`, `cf-email`, etc.) and are wired up by one handler in `main.js`, so a form-handling change only needs to happen once. The homepage nav, hero, admissions, final CTA, and footer all link to `#contact` rather than `/contact` now; the standalone `/contact` page still works (for direct traffic, external links, search results) but isn't linked from within the homepage anymore.
+
+## Analytics
+
+GA4 tag `G-NMEJ7BV822` is loaded in the `<head>` of `index.html` and `contact.html` (not `admin.html`, which is internal-only). Two custom events, both fired from `main.js`:
+
+- `apply_click` - fires on click for any element with a `data-ga-apply` attribute (all the "Apply Now" / "Apply for Momentum" / "Start your application" buttons and links). The attribute value becomes the `link_location` param (`header_nav`, `mobile_nav`, `hero`, `admissions_section`, `contact_section`, `contact_page`, `final_cta`) so Robert can see which CTA is converting. Adding a new Apply-style CTA anywhere on the site should get a `data-ga-apply="<something descriptive>"` attribute to stay tracked.
+- `contact_form_submit` - fires once the contact form POST to `api/contact` succeeds, with a `page_location` param (`/` or `/contact`) so submissions from the homepage embed and the standalone page can be told apart.
 
 ## Copy conventions
 
