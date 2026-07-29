@@ -307,7 +307,7 @@ a { color: var(--purple); text-decoration: none; }
 .card-photo {
   display: block;
   width: calc(100% + 3.6rem);
-  height: 170px;
+  height: 215px;
   object-fit: cover;
   margin: -2rem -1.8rem 1.4rem;
 }
@@ -695,6 +695,14 @@ a { color: var(--purple); text-decoration: none; }
   box-shadow: var(--shadow);
   margin: 1.8rem 0;
 }
+.jackie-photo-wrap { margin: 1.8rem 0; }
+.jackie-photo-wrap .inline-photo { margin: 0 0 0.9rem; }
+.jackie-credit { display: flex; align-items: center; justify-content: center; gap: 0.7rem; }
+.jackie-credit img {
+  width: 40px; height: 40px; object-fit: contain; border-radius: 8px;
+  background: #fff; border: 1px solid var(--line); padding: 4px;
+}
+.jackie-credit span { font-size: 0.92rem; color: var(--muted); font-weight: 600; }
 
 /* ===== Collaboration ===== */
 .section-collab { background: var(--bg-soft); }
