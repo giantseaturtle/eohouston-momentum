@@ -677,6 +677,17 @@ a { color: var(--purple); text-decoration: none; }
   box-shadow: 0 14px 30px -16px rgba(109, 69, 208, 0.5);
 }
 
+/* ===== Inline photo banner (breaks up long text stretches) ===== */
+.inline-photo {
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 1.8rem 0;
+}
+
 /* ===== Collaboration ===== */
 .section-collab { background: var(--bg-soft); }
 .disclaimer {
@@ -770,6 +781,8 @@ a { color: var(--purple); text-decoration: none; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
+  .inline-photo { height: 220px; }
+
   /* Tighten hero so the four stats sit higher (toward above-the-fold) */
   .hero { padding: 1.9rem 0 2.3rem; }
   .eyebrow { font-size: 0.78rem; margin-bottom: 0.8rem; }
