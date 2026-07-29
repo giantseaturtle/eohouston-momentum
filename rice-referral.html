@@ -64,7 +64,7 @@
     .angle-when { padding: 12px 22px 0; font-size: 12.5px; color: var(--muted); }
 
     .email-preview { padding: 18px 22px 22px; font-size: 13.5px; line-height: 1.7; color: var(--ink); }
-    .email-header-photo { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto 16px; border-radius: 8px; }
+    .email-header-photo { display: block; width: 100%; height: 210px; object-fit: cover; object-position: center top; border-radius: 8px; margin-bottom: 16px; }
     .email-class-photo { display: block; width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin: 4px 0 14px; }
     .email-caption { font-size: 11px; color: var(--muted); font-style: italic; margin: -10px 0 14px; }
     .email-subject {
@@ -127,15 +127,47 @@
       Swap in the real name, tweak a line or two to sound like you, and send. A few notes on
       picking an angle:
       <ul>
+        <li><strong>Rice Lilie Lab angle</strong>, best for Rice-affiliated contacts who'd want to hear the institutional connection first.</li>
         <li><strong>Jackie Fisher angle</strong>, best for people who know Jackie or care about a founder's story more than credentials.</li>
         <li><strong>EO Houston angle</strong>, best for someone who'd be motivated by the community and network they'd be joining, not just the coursework.</li>
         <li><strong>Al Danto angle</strong>, written in your own voice, for people who know you personally and would respond to a direct note from you.</li>
-        <li><strong>Rice Lilie Lab angle</strong>, best for Rice-affiliated contacts who'd want to hear the institutional connection first.</li>
       </ul>
       Mixing paragraphs from two angles into one email is fine, these are starting points, not scripts.
-      Attach <a href="https://claude.ai/code/artifact/64e9d2a7-1f26-490b-b34e-eab3875eab56" target="_blank" rel="noopener">the one-page flier</a> to any of these before sending, open it, then save or print to PDF to attach.
+Attach <a href="https://eomomentum.com/rice-flier" target="_blank" rel="noopener">the one-page flier</a> to any of these before sending. Preview it, then use your browser's Print &rarr; Save as PDF to download it.
     </div>
   </header>
+
+  <!-- ================= RICE LILIE LAB ANGLE ================= -->
+  <div class="angle" id="angle-lilie">
+    <div class="angle-head">
+      <h2>Rice Lilie Lab angle</h2>
+      <span class="tag">Institutional</span>
+    </div>
+    <p class="angle-when">Leads with the Lilie Lab connection, for Rice-affiliated contacts who'd want that context first.</p>
+    <div class="email-preview">
+      <img class="email-header-photo" src="https://eomomentum.com/assets/og-image.png" alt="EO Houston Momentum: Stop grinding. Start growing." />
+      <div class="email-subject"><span>Subject</span>Built with Lilie Lab rigor, for Houston's next $1M founders</div>
+      <div class="email-body">
+        <p>Hi [Name],</p>
+        <p>Something the Lilie Lab community should know about: EO Houston Momentum, a two-year accelerator for Houston business owners ready to scale past $1 million in revenue.</p>
+        <p>The curriculum was shaped by Al Danto, Rice's own graduate entrepreneurship professor, and <strong>Jackie Fisher</strong>, a Rice alum, bringing the same rigor we value at the Lilie Lab to real operators outside the classroom. It's not a Rice program and it doesn't require a Rice degree, but it's the kind of thing Rice should be proud helped exist.</p>
+        <img class="email-class-photo" src="https://eomomentum.com/assets/photos/classroom.jpg" alt="A Momentum class in session" />
+        <p class="email-caption">A Momentum class in session.</p>
+        <p>Momentum is for owners or co-founders with:</p>
+        <ul>
+          <li>Yearly revenue over $250,000</li>
+          <li>A drive to build past $1 million in under two years</li>
+        </ul>
+        <p>Applications for the cohort beginning October 2026 close September 15, 2026.</p>
+        <p>More at <a href="https://eomomentum.com">eomomentum.com</a></p>
+        <p>[Your name]</p>
+      </div>
+    </div>
+    <div class="angle-actions">
+      <button class="copy-btn" data-target="angle-lilie">Copy email</button>
+      <span class="copy-msg">Copied!</span>
+    </div>
+  </div>
 
   <!-- ================= JACKIE FISHER ANGLE ================= -->
   <div class="angle" id="angle-jackie">
@@ -207,7 +239,7 @@
       <div class="email-body">
         <p>Hi [Name],</p>
         <p>I wanted to share something I've been part of building: EO Houston Momentum, a two-year accelerator for Houston business owners ready to break past $1 million in revenue, run by Entrepreneurs' Organization Houston, a nonprofit that's part of a global network of 20,000+ entrepreneurs in 224 chapters.</p>
-        <p>I worked on the curriculum alongside <strong>Jackie Fisher</strong>, a Rice alum. It draws on the same rigor I bring to my work as a graduate entrepreneurship professor here at Rice, but it's not a Rice program and it doesn't require a Rice degree to join. It's built for real operators, with 10 months of classes a year, a confidential peer Forum, and a community of founders who actually show up for each other.</p>
+        <p>I worked on the curriculum alongside <strong>Jackie Fisher</strong>, a Rice alum. It draws on the same rigor I bring to my work as a graduate entrepreneurship professor here at Rice, but it's not a Rice program and it doesn't require a Rice degree to join. It's built for real operators, with 8 months of classes a year, a confidential peer Forum that meets monthly year-round, and a community of founders who actually show up for each other.</p>
         <p>Momentum is for owners or co-founders with:</p>
         <ul>
           <li>Yearly revenue over $250,000</li>
@@ -221,38 +253,6 @@
     </div>
     <div class="angle-actions">
       <button class="copy-btn" data-target="angle-al">Copy email</button>
-      <span class="copy-msg">Copied!</span>
-    </div>
-  </div>
-
-  <!-- ================= RICE LILIE LAB ANGLE ================= -->
-  <div class="angle" id="angle-lilie">
-    <div class="angle-head">
-      <h2>Rice Lilie Lab angle</h2>
-      <span class="tag">Institutional</span>
-    </div>
-    <p class="angle-when">Leads with the Lilie Lab connection, for Rice-affiliated contacts who'd want that context first.</p>
-    <div class="email-preview">
-      <img class="email-header-photo" src="https://eomomentum.com/assets/og-image.png" alt="EO Houston Momentum: Stop grinding. Start growing." />
-      <div class="email-subject"><span>Subject</span>Built with Lilie Lab rigor, for Houston's next $1M founders</div>
-      <div class="email-body">
-        <p>Hi [Name],</p>
-        <p>Something the Lilie Lab community should know about: EO Houston Momentum, a two-year accelerator for Houston business owners ready to scale past $1 million in revenue.</p>
-        <p>The curriculum was shaped by Al Danto, Rice's own graduate entrepreneurship professor, and <strong>Jackie Fisher</strong>, a Rice alum, bringing the same rigor we value at the Lilie Lab to real operators outside the classroom. It's not a Rice program and it doesn't require a Rice degree, but it's the kind of thing Rice should be proud helped exist.</p>
-        <img class="email-class-photo" src="https://eomomentum.com/assets/photos/classroom.jpg" alt="A Momentum class in session" />
-        <p class="email-caption">A Momentum class in session.</p>
-        <p>Momentum is for owners or co-founders with:</p>
-        <ul>
-          <li>Yearly revenue over $250,000</li>
-          <li>A drive to build past $1 million in under two years</li>
-        </ul>
-        <p>Applications for the cohort beginning October 2026 close September 15, 2026.</p>
-        <p>More at <a href="https://eomomentum.com">eomomentum.com</a></p>
-        <p>[Your name]</p>
-      </div>
-    </div>
-    <div class="angle-actions">
-      <button class="copy-btn" data-target="angle-lilie">Copy email</button>
       <span class="copy-msg">Copied!</span>
     </div>
   </div>

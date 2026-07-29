@@ -527,7 +527,15 @@ a { color: var(--purple); text-decoration: none; }
 .faq-item[open] summary::after { transform: rotate(-135deg); }
 .faq-item summary:hover { color: var(--purple); }
 .faq-a { padding: 0 1.3rem 1.25rem; color: var(--body); }
-.faq-a p { margin: 0; line-height: 1.65; }
+.faq-a p { margin: 0 0 0.9rem; line-height: 1.65; }
+.faq-a p:last-child { margin-bottom: 0; }
+.faq-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.6rem; }
+.faq-list li { line-height: 1.6; padding-left: 1.1rem; position: relative; }
+.faq-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.55rem;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--grad);
+}
+.faq-list strong { color: var(--ink); }
 
 /* ===== About / Team ===== */
 .team-group-title {
