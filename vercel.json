@@ -2,6 +2,11 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/momentum-carousel",
+      "destination": "/momentum-marketing-rice",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [{ "type": "host", "value": "www.eomomentum.com" }],
       "destination": "https://eomomentum.com/",

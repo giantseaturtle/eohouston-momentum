@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Momentum &mdash; social carousel for Al</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/eo-favicon-32.png" />
+  <style>
+    :root {
+      --eo-navy: #0A1F44;
+      --eo-navy-deep: #061533;
+      --eo-navy-soft: #122a55;
+      --purple: #6D45D0;
+      --violet: #9B6BFF;
+      --cyan: #21C7E6;
+      --ink: #16182a;
+      --body: #3a3f55;
+      --muted: #6b7290;
+      --line: #e6e8f0;
+      --bg-soft: #f6f7fb;
+      --grad: linear-gradient(135deg, #6D45D0 0%, #9B6BFF 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: #e4e6ef; font-family: 'Inter', -apple-system, sans-serif;
+      display: flex; flex-direction: column; align-items: center; padding: 40px 16px 100px; gap: 28px;
+    }
+    .page-head { max-width: 700px; text-align: center; margin-bottom: 8px; }
+    .page-head h1 { font-family: 'Sora', sans-serif; color: var(--eo-navy); font-size: 22px; margin: 0 0 10px; }
+    .page-head p { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 0 0 8px; }
+    .page-head p:last-child { margin-bottom: 0; }
+
+    .slide-label { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted); }
+
+    .card {
+      width: 1080px; height: 1080px; max-width: 100%; aspect-ratio: 1/1;
+      position: relative; overflow: hidden; border-radius: 12px;
+      box-shadow: 0 20px 50px -20px rgba(10,31,68,0.35);
+      display: flex; flex-direction: column;
+    }
+    .card * { box-sizing: border-box; }
+
+    /* shared bits */
+    .logo-row { display: flex; align-items: center; gap: 16px; }
+    .logo-row .word strong { font-family: 'Sora', sans-serif; font-size: 26px; display: block; color: #fff; }
+    .logo-row .word span { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: 0.16em; color: var(--violet); }
+
+    .kicker {
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--purple); margin: 0 0 16px;
+    }
+    h2.card-title {
+      font-family: 'Sora', sans-serif; font-weight: 800; font-size: 54px; line-height: 1.08;
+      color: var(--eo-navy); margin: 0; letter-spacing: -0.01em;
+    }
+    p.card-body { font-size: 26px; line-height: 1.5; color: var(--body); margin: 0; }
+
+    /* ===== full-bleed photo cards (1, 5, 7) ===== */
+    .card.bleed { color: #fff; }
+    .card.bleed .bg-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+    .card.bleed .scrim {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(6,21,51,0.96) 0%, rgba(6,21,51,0.86) 26%, rgba(6,21,51,0.4) 52%, rgba(6,21,51,0.08) 68%, rgba(6,21,51,0) 78%);
+    }
+    .card.bleed .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; padding: 56px; }
+    .card.bleed .kicker { color: var(--cyan); }
+
+    .cover-headline {
+      font-family: 'Sora', sans-serif; font-weight: 800; font-size: 88px; line-height: 1.04;
+      letter-spacing: -0.01em; margin: 0 0 26px;
+    }
+    .cover-headline .grad {
+      background: linear-gradient(135deg, #fff 0%, var(--violet) 130%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .cover-sub { font-size: 28px; line-height: 1.5; color: rgba(255,255,255,0.9); max-width: 780px; }
+    .swipe-hint {
+      display: flex; align-items: center; gap: 12px; margin-top: 30px;
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 22px; color: rgba(255,255,255,0.75);
+    }
+
+    /* ===== light cards (2, 3, 4) ===== */
+    .card.light { background: #fff; color: var(--body); padding: 56px; }
+
+    /* slide 2: credibility, two large photo tiles */
+    .people-row { display: flex; gap: 32px; margin-top: 26px; flex: 1; min-height: 0; }
+    .person-tile { flex: 1; display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; background: var(--bg-soft); border: 1px solid var(--line); }
+    .person-tile img { width: 100%; flex: 1; min-height: 0; object-fit: cover; display: block; }
+    .person-tile .cap { padding: 20px 22px 22px; }
+    .person-tile .pn { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 25px; color: var(--eo-navy); }
+    .person-tile .pr { font-size: 18px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+    /* slide 3 / 4: photo block + supporting content */
+    .feature-photo { width: 100%; border-radius: 20px; overflow: hidden; margin: 24px 0; flex: 1; min-height: 0; }
+    .feature-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .stats-row { display: flex; gap: 0; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+    .stats-row div { flex: 1; text-align: center; padding: 24px 10px; border-left: 1px solid var(--line); }
+    .stats-row div:first-child { border-left: 0; }
+    .stats-row .n { display: block; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 32px; color: var(--eo-navy); }
+    .stats-row .l { display: block; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-top: 6px; }
+
+    .checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+    .checklist li {
+      font-size: 27px; color: var(--ink); font-weight: 600; display: flex; align-items: flex-start; gap: 16px;
+    }
+    .checklist .dot {
+      flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--grad);
+      display: flex; align-items: center; justify-content: center; color: #fff; font-size: 17px; margin-top: 3px;
+    }
+
+    /* slide 6: dates, photo band + accent gradient */
+    .card.accent { background: var(--grad); color: #fff; padding: 0; }
+    .card.accent .photo-band { width: 100%; height: 32%; overflow: hidden; }
+    .card.accent .photo-band img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card.accent .accent-content { flex: 1; padding: 44px 56px 56px; display: flex; flex-direction: column; justify-content: center; }
+    .card.accent .kicker { color: rgba(255,255,255,0.9); }
+    .card.accent h2.card-title { color: #fff; font-size: 56px; margin-bottom: 8px; }
+    .date-list { list-style: none; margin: 34px 0 0; padding: 0; display: grid; gap: 26px; }
+    .date-list li { display: flex; align-items: baseline; gap: 20px; }
+    .date-list .d { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 34px; white-space: nowrap; }
+    .date-list .t { font-size: 25px; color: rgba(255,255,255,0.92); }
+
+    /* slide 7: CTA */
+    .cta-headline { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 60px; line-height: 1.08; margin: 0 0 30px; max-width: 880px; }
+    .cta-url {
+      font-family: 'Sora', sans-serif; font-weight: 800; font-size: 46px; color: #fff;
+      background: var(--grad); display: inline-block; padding: 22px 40px; border-radius: 999px; text-decoration: none;
+    }
+    .fine-print { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.62); max-width: 780px; margin-top: 26px; }
+
+    body.export-mode { padding: 0; gap: 0; background: #fff; align-items: flex-start; }
+    body.export-mode .page-head,
+    body.export-mode .slide-label,
+    body.export-mode .downloads { display: none !important; }
+    body.export-mode .card { display: none; border-radius: 0; box-shadow: none; }
+    body.export-mode .card.export-target { display: flex; }
+
+    .downloads { max-width: 900px; width: 100%; margin: 12px 0 0; }
+    .downloads h2 { font-family: 'Sora', sans-serif; color: var(--eo-navy); font-size: 20px; margin: 0 0 14px; }
+    .downloads ol { color: var(--body); font-size: 15px; line-height: 1.7; padding-left: 20px; margin: 0 0 22px; }
+    .download-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+    .download-grid a {
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      background: var(--grad); color: #fff; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px;
+      padding: 14px 10px; border-radius: 10px; text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-head">
+    <h1>Momentum social carousel &mdash; 7 slides</h1>
+    <p><strong>What this is:</strong> a ready-to-post LinkedIn/Instagram carousel for reaching Rice's Lilie Lab network and Al's own following. Same story as the flier and email angles, in a scrollable, photo-led format built for social feeds.</p>
+    <p>Square 1080&times;1080, real photos of the program and the people behind it. Download links and posting notes at the bottom of the page.</p>
+  </div>
+
+  <!-- 1: COVER -->
+  <p class="slide-label">Slide 1 of 7 &mdash; Cover</p>
+  <div class="card bleed" id="slide-1">
+    <img class="bg-photo" src="https://eomomentum.com/assets/photos/classroom.jpg" alt="A Momentum class in session" style="object-position: center 35%;" />
+    <div class="scrim"></div>
+    <div class="content">
+      <div class="logo-row">
+        <svg class="mark" viewBox="0 0 48 48" width="52" height="52" role="img" aria-label="Momentum mark">
+          <defs><linearGradient id="mg1" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6D45D0" /><stop offset="1" stop-color="#9B6BFF" /></linearGradient></defs>
+          <circle cx="24" cy="24" r="22" fill="none" stroke="url(#mg1)" stroke-width="3.4" />
+          <rect x="14" y="26" width="5.5" height="10" rx="1.5" fill="url(#mg1)" />
+          <rect x="21.5" y="21" width="5.5" height="15" rx="1.5" fill="url(#mg1)" />
+          <rect x="29" y="16" width="5.5" height="20" rx="1.5" fill="url(#mg1)" />
+        </svg>
+        <span class="word"><strong>EO Houston</strong><span>MOMENTUM</span></span>
+      </div>
+      <div style="flex:1"></div>
+      <p class="kicker">For Rice entrepreneurs</p>
+      <h1 class="cover-headline">Stop grinding.<br /><span class="grad">Start growing.</span></h1>
+      <p class="cover-sub">A two-year Houston accelerator built by two Rice minds.</p>
+      <div class="swipe-hint">Swipe &rarr;</div>
+    </div>
+  </div>
+
+  <!-- 2: CREDIBILITY -->
+  <p class="slide-label">Slide 2 of 7 &mdash; Who built it</p>
+  <div class="card light" id="slide-2">
+    <p class="kicker">Built by two Rice minds</p>
+    <h2 class="card-title">Not theory. Real operators.</h2>
+    <div class="people-row">
+      <div class="person-tile">
+        <img src="https://eomomentum.com/assets/team/jackie.jpg" alt="Jackie Fisher" />
+        <div class="cap">
+          <div class="pn">Jackie Fisher</div>
+          <div class="pr">Rice alum, Owner of 3 Men Movers</div>
+        </div>
+      </div>
+      <div class="person-tile">
+        <img src="https://eomomentum.com/assets/team/al-danto.png" alt="Al Danto" style="object-position: center 20%;" />
+        <div class="cap">
+          <div class="pn">Al Danto</div>
+          <div class="pr">Program Director &amp; Sr. Lecturer, Rice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3: WHAT IS MOMENTUM -->
+  <p class="slide-label">Slide 3 of 7 &mdash; What it is</p>
+  <div class="card light" id="slide-3">
+    <p class="kicker">What is Momentum?</p>
+    <h2 class="card-title">Not a seminar. Not a pitch club.</h2>
+    <div class="feature-photo">
+      <img src="https://eomomentum.com/assets/photos/retreat-forum.jpg" alt="A Momentum peer Forum group meeting" />
+    </div>
+    <div class="stats-row">
+      <div><span class="n">2-Year</span><span class="l">Program</span></div>
+      <div><span class="n">$1M+</span><span class="l">Revenue Goal</span></div>
+      <div><span class="n">Monthly</span><span class="l">Forum</span></div>
+      <div><span class="n">Social</span><span class="l">Events</span></div>
+    </div>
+  </div>
+
+  <!-- 4: WHO IT'S FOR -->
+  <p class="slide-label">Slide 4 of 7 &mdash; Who it's for</p>
+  <div class="card light" id="slide-4">
+    <p class="kicker">Who it&rsquo;s for</p>
+    <h2 class="card-title">Ready to build past $1M?</h2>
+    <div class="feature-photo">
+      <img src="https://eomomentum.com/assets/photos/social-highfive.jpg" alt="Momentum members celebrating together" style="object-position: center 30%;" />
+    </div>
+    <ul class="checklist">
+      <li><span class="dot">&#10003;</span> Owner or co-founder of a business</li>
+      <li><span class="dot">&#10003;</span> Yearly revenue over $250,000</li>
+      <li><span class="dot">&#10003;</span> Ready to build past $1M in under two years</li>
+    </ul>
+  </div>
+
+  <!-- 5: THE REAL VALUE -->
+  <p class="slide-label">Slide 5 of 7 &mdash; The real unlock</p>
+  <div class="card bleed" id="slide-5">
+    <img class="bg-photo" src="https://eomomentum.com/assets/photos/connect-lounge.jpg" alt="Momentum members networking" style="object-position: center 15%;" />
+    <div class="scrim"></div>
+    <div class="content" style="justify-content:flex-end;">
+      <p class="kicker">The real unlock</p>
+      <h2 class="card-title" style="color:#fff; font-size:52px; margin-bottom:20px;">Real experience from founders who&rsquo;ve done it.</h2>
+      <p class="card-body" style="color:rgba(255,255,255,0.88);">Direct access to Entrepreneurs&rsquo; Organization Houston&rsquo;s network of 200+ businesses that have already scaled past $1M, part of a global network of 20,000+ entrepreneurs in 224 chapters worldwide.</p>
+    </div>
+  </div>
+
+  <!-- 6: KEY DATES -->
+  <p class="slide-label">Slide 6 of 7 &mdash; Key dates</p>
+  <div class="card accent" id="slide-6">
+    <div class="photo-band">
+      <img src="https://eomomentum.com/assets/photos/gala-group.jpg" alt="Momentum and EO Houston members" style="object-position: center 30%;" />
+    </div>
+    <div class="accent-content">
+      <p class="kicker">Key dates</p>
+      <h2 class="card-title">Cohort begins October 2026.</h2>
+      <ul class="date-list">
+        <li><span class="d">Sep 15, 2026</span><span class="t">&mdash; applications close</span></li>
+        <li><span class="d">Aug&ndash;Sept 2026</span><span class="t">&mdash; interviews</span></li>
+        <li><span class="d">Oct 2026</span><span class="t">&mdash; cohort begins</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7: CTA -->
+  <p class="slide-label">Slide 7 of 7 &mdash; Apply</p>
+  <div class="card bleed" id="slide-7">
+    <img class="bg-photo" src="https://eomomentum.com/assets/photos/social-cornhole.jpg" alt="Momentum and EO Houston members at a social event" style="object-position: center 25%;" />
+    <div class="scrim"></div>
+    <div class="content" style="justify-content:flex-end;">
+      <div class="logo-row" style="margin-bottom:36px;">
+        <svg class="mark" viewBox="0 0 48 48" width="52" height="52" role="img" aria-label="Momentum mark">
+          <defs><linearGradient id="mg2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6D45D0" /><stop offset="1" stop-color="#9B6BFF" /></linearGradient></defs>
+          <circle cx="24" cy="24" r="22" fill="none" stroke="url(#mg2)" stroke-width="3.4" />
+          <rect x="14" y="26" width="5.5" height="10" rx="1.5" fill="url(#mg2)" />
+          <rect x="21.5" y="21" width="5.5" height="15" rx="1.5" fill="url(#mg2)" />
+          <rect x="29" y="16" width="5.5" height="20" rx="1.5" fill="url(#mg2)" />
+        </svg>
+        <span class="word"><strong>EO Houston</strong><span>MOMENTUM</span></span>
+      </div>
+      <h2 class="cta-headline">Apply for Momentum today.</h2>
+      <a class="cta-url" href="https://eomomentum.com">eomomentum.com</a>
+      <p class="fine-print">Momentum is an independent program of EO Houston, a chapter of the Entrepreneurs&rsquo; Organization. Rice University faculty and alumni participate as instructors and coaches in their individual capacities.</p>
+    </div>
+  </div>
+
+  <div class="downloads">
+    <h2>Post this as a carousel</h2>
+    <ol>
+      <li><strong>LinkedIn:</strong> start a post, click the image icon, and select all 7 files at once (or use "Create a carousel" if offered) &mdash; LinkedIn keeps the order you select them in, so pick slide-1 through slide-7 in order.</li>
+      <li><strong>Instagram:</strong> tap the multi-photo icon when creating a post, add all 7 in order, then post as a carousel.</li>
+    </ol>
+    <div class="download-grid">
+      <a href="assets/carousel/slide-1.png" download>Slide 1<br />Cover</a>
+      <a href="assets/carousel/slide-2.png" download>Slide 2<br />Who built it</a>
+      <a href="assets/carousel/slide-3.png" download>Slide 3<br />What it is</a>
+      <a href="assets/carousel/slide-4.png" download>Slide 4<br />Who it&rsquo;s for</a>
+      <a href="assets/carousel/slide-5.png" download>Slide 5<br />Real unlock</a>
+      <a href="assets/carousel/slide-6.png" download>Slide 6<br />Key dates</a>
+      <a href="assets/carousel/slide-7.png" download>Slide 7<br />Apply</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var exportSlide = params.get('export');
+      if (!exportSlide) return;
+      document.body.classList.add('export-mode');
+      var target = document.getElementById('slide-' + exportSlide);
+      if (target) target.classList.add('export-target');
+    })();
+  </script>
+</body>
+</html>
