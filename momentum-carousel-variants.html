@@ -106,12 +106,13 @@
     .person-tile .pr { font-size: 16px; color: var(--muted); margin-top: 4px; line-height: 1.35; }
 
     /* testimonial spotlight (navy bleed) */
-    .quote-mark { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 90px; color: var(--violet); line-height: 1; margin: 0 0 4px; }
-    .quote-text { font-size: 30px; line-height: 1.5; color: #fff; margin: 0 0 24px; }
+    .quote-block { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .quote-mark { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 130px; color: var(--violet); line-height: 1; margin: 0 0 8px; }
+    .quote-text { font-size: 48px; line-height: 1.35; font-weight: 600; color: #fff; margin: 0 0 36px; max-width: 860px; }
     .quote-who { display: flex; align-items: center; gap: 18px; }
-    .quote-who img { width: 74px; height: 74px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.4); }
-    .quote-who .qn { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 22px; color: #fff; }
-    .quote-who .qr { font-size: 17px; color: rgba(255,255,255,0.7); }
+    .quote-who img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.4); flex: none; }
+    .quote-who .qn { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 24px; color: #fff; text-align: left; }
+    .quote-who .qr { font-size: 18px; color: rgba(255,255,255,0.7); text-align: left; }
 
     /* curriculum feature photo */
     .feature-photo { width: 100%; border-radius: 20px; overflow: hidden; margin: 20px 0; flex: 1; min-height: 0; }
@@ -563,10 +564,12 @@
           <div class="solo-cap"><div class="pn">${sp.person.name}</div><div class="pr">${sp.person.role}</div></div>`;
       }
       if (sp.kind === 'testimonial') {
-        return `${logoRow('mgq')}<div style="flex:1"></div>
-          <p class="quote-mark">&ldquo;</p>
-          <p class="quote-text">${sp.quote}</p>
-          <div class="quote-who"><img src="${sp.person.photo}" alt="${sp.person.name}" /><div><div class="qn">${sp.person.name}</div><div class="qr">${sp.person.role}</div></div></div>`;
+        return `${logoRow('mgq')}
+          <div class="quote-block">
+            <p class="quote-mark">&ldquo;</p>
+            <p class="quote-text">${sp.quote}</p>
+            <div class="quote-who"><img src="${sp.person.photo}" alt="${sp.person.name}" /><div><div class="qn">${sp.person.name}</div><div class="qr">${sp.person.role}</div></div></div>
+          </div>`;
       }
       // pair
       return `<p class="kicker">${sp.kicker}</p><h2 class="card-title">${sp.headline}</h2>
