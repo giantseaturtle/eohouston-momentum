@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Momentum &mdash; 15 carousel variations</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/eo-favicon-32.png" />
+  <style>
+    :root {
+      --eo-navy: #0A1F44; --eo-navy-deep: #061533; --eo-navy-soft: #122a55;
+      --purple: #6D45D0; --violet: #9B6BFF; --cyan: #21C7E6;
+      --ink: #16182a; --body: #3a3f55; --muted: #6b7290;
+      --line: #e6e8f0; --bg-soft: #f6f7fb;
+      --grad: linear-gradient(135deg, #6D45D0 0%, #9B6BFF 100%);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: #e4e6ef; font-family: 'Inter', -apple-system, sans-serif;
+      display: flex; flex-direction: column; align-items: center; padding: 40px 16px 100px; gap: 20px;
+    }
+    .page-head { max-width: 720px; text-align: center; margin-bottom: 8px; }
+    .page-head h1 { font-family: 'Sora', sans-serif; color: var(--eo-navy); font-size: 22px; margin: 0 0 10px; }
+    .page-head p { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 0 0 8px; }
+
+    .variant-group { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .variant-header { max-width: 900px; width: 100%; text-align: center; margin: 24px 0 4px; }
+    .variant-header .vnum { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 0.12em; color: var(--violet); }
+    .variant-header h2 { font-family: 'Sora', sans-serif; color: var(--eo-navy); font-size: 20px; margin: 4px 0 6px; }
+    .variant-header p { color: var(--muted); font-size: 13.5px; margin: 0; }
+    .variant-header .download-all { margin-top: 12px; }
+
+    .slide-label { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted); }
+
+    .card {
+      width: 1080px; height: 1080px; max-width: 100%; aspect-ratio: 1/1;
+      position: relative; overflow: hidden; border-radius: 12px;
+      box-shadow: 0 20px 50px -20px rgba(10,31,68,0.35);
+      display: flex; flex-direction: column;
+    }
+    .card * { box-sizing: border-box; }
+
+    .logo-row { display: flex; align-items: center; gap: 16px; }
+    .logo-row .word strong { font-family: 'Sora', sans-serif; font-size: 26px; display: block; color: #fff; }
+    .logo-row .word span { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: 0.16em; color: var(--violet); }
+
+    .kicker {
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--purple); margin: 0 0 16px;
+    }
+    h2.card-title {
+      font-family: 'Sora', sans-serif; font-weight: 800; font-size: 52px; line-height: 1.1;
+      color: var(--eo-navy); margin: 0; letter-spacing: -0.01em;
+    }
+    p.card-body { font-size: 25px; line-height: 1.5; color: var(--body); margin: 0; }
+
+    .card.bleed { color: #fff; }
+    .card.bleed .bg-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+    .card.bleed .scrim {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(6,21,51,0.96) 0%, rgba(6,21,51,0.86) 26%, rgba(6,21,51,0.4) 52%, rgba(6,21,51,0.08) 68%, rgba(6,21,51,0) 78%);
+    }
+    .card.bleed .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; padding: 56px; }
+    .card.bleed .kicker { color: var(--cyan); }
+    .card.bleed .logo-row {
+      background: rgba(6,21,51,0.6); padding: 10px 22px 10px 12px; border-radius: 999px;
+      align-self: flex-start; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+
+    .cover-headline {
+      font-family: 'Sora', sans-serif; font-weight: 800; font-size: 84px; line-height: 1.05;
+      letter-spacing: -0.01em; margin: 0 0 24px;
+    }
+    .cover-headline .grad {
+      background: linear-gradient(135deg, #fff 0%, var(--violet) 130%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .cover-sub { font-size: 27px; line-height: 1.5; color: rgba(255,255,255,0.9); max-width: 800px; }
+    .swipe-hint {
+      display: flex; align-items: center; gap: 12px; margin-top: 28px;
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 22px; color: rgba(255,255,255,0.75);
+    }
+
+    .card.light { background: #fff; color: var(--body); padding: 56px; }
+    .card.navy {
+      background: radial-gradient(130% 130% at 78% 0%, var(--eo-navy-soft) 0%, var(--eo-navy) 45%, var(--eo-navy-deep) 100%);
+      color: #fff; padding: 56px;
+    }
+
+    /* solo spotlight */
+    .solo-photo { width: 100%; flex: 1; min-height: 0; border-radius: 20px; overflow: hidden; margin: 20px 0; background: var(--bg-soft); }
+    .solo-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .solo-cap .pn { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 30px; color: var(--eo-navy); }
+    .solo-cap .pr { font-size: 20px; color: var(--muted); margin-top: 4px; }
+
+    /* pair spotlight (reused proven layout) */
+    .people-row { display: flex; gap: 32px; margin-top: 22px; flex: 1; min-height: 0; }
+    .person-tile { flex: 1; display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; background: var(--bg-soft); border: 1px solid var(--line); }
+    .person-tile img { width: 100%; flex: 1; min-height: 0; object-fit: cover; display: block; }
+    .person-tile .cap { padding: 18px 20px 20px; }
+    .person-tile .pn { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 23px; color: var(--eo-navy); }
+    .person-tile .pr { font-size: 16px; color: var(--muted); margin-top: 4px; line-height: 1.35; }
+
+    /* testimonial spotlight (navy bleed) */
+    .quote-mark { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 90px; color: var(--violet); line-height: 1; margin: 0 0 4px; }
+    .quote-text { font-size: 30px; line-height: 1.5; color: #fff; margin: 0 0 24px; }
+    .quote-who { display: flex; align-items: center; gap: 18px; }
+    .quote-who img { width: 74px; height: 74px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.4); }
+    .quote-who .qn { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 22px; color: #fff; }
+    .quote-who .qr { font-size: 17px; color: rgba(255,255,255,0.7); }
+
+    /* curriculum feature photo */
+    .feature-photo { width: 100%; border-radius: 20px; overflow: hidden; margin: 20px 0; flex: 1; min-height: 0; }
+    .feature-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* roadmap list (all 8 months, no photo) */
+    .roadmap-list { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 13px; flex: 1; }
+    .roadmap-list li { display: flex; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 13px; }
+    .roadmap-list .rm { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 21px; color: var(--purple); white-space: nowrap; }
+    .roadmap-list .rt { font-size: 21px; color: var(--ink); font-weight: 600; }
+
+    .stats-row { display: flex; gap: 0; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+    .stats-row div { flex: 1; text-align: center; padding: 22px 8px; border-left: 1px solid var(--line); }
+    .stats-row div:first-child { border-left: 0; }
+    .stats-row .n { display: block; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 30px; color: var(--eo-navy); }
+    .stats-row .l { display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-top: 6px; }
+
+    .checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+    .checklist li { font-size: 25px; color: var(--ink); font-weight: 600; display: flex; align-items: flex-start; gap: 16px; }
+    .checklist .dot {
+      flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--grad);
+      display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; margin-top: 3px;
+    }
+
+    .card.accent { background: var(--grad); color: #fff; padding: 0; }
+    .card.accent .photo-band { width: 100%; height: 30%; overflow: hidden; }
+    .card.accent .photo-band img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card.accent .accent-content { flex: 1; padding: 40px 56px 56px; display: flex; flex-direction: column; justify-content: center; }
+    .card.accent .kicker { color: rgba(255,255,255,0.9); }
+    .card.accent h2.card-title { color: #fff; font-size: 54px; margin-bottom: 8px; }
+    .date-list { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 24px; }
+    .date-list li { display: flex; align-items: baseline; gap: 20px; }
+    .date-list .d { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 32px; white-space: nowrap; }
+    .date-list .t { font-size: 24px; color: rgba(255,255,255,0.92); }
+
+    .cta-headline { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 58px; line-height: 1.1; margin: 0 0 28px; max-width: 880px; }
+    .cta-url {
+      font-family: 'Sora', sans-serif; font-weight: 800; font-size: 44px; color: #fff;
+      background: var(--grad); display: inline-block; padding: 20px 38px; border-radius: 999px; text-decoration: none;
+    }
+    .fine-print { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.62); max-width: 780px; margin-top: 24px; }
+
+    body.export-mode { padding: 0; gap: 0; background: #fff; align-items: flex-start; }
+    body.export-mode .page-head, body.export-mode .slide-label, body.export-mode .variant-header,
+    body.export-mode .downloads, body.export-mode .index-nav { display: none !important; }
+    body.export-mode .card { display: none; border-radius: 0; box-shadow: none; }
+    body.export-mode .card.export-target { display: flex; }
+
+    .downloads { max-width: 900px; width: 100%; margin: 4px 0 0; text-align: center; }
+    .download-all {
+      display: inline-flex; align-items: center; gap: 10px; background: var(--eo-navy); color: #fff;
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14px; padding: 12px 20px;
+      border-radius: 10px; text-decoration: none;
+    }
+    .index-nav { max-width: 900px; width: 100%; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px 24px; }
+    .index-nav h2 { font-family: 'Sora', sans-serif; color: var(--eo-navy); font-size: 16px; margin: 0 0 12px; }
+    .index-nav ol { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.9; color: var(--body); }
+    .index-nav a { color: var(--purple); font-weight: 600; text-decoration: none; }
+    .index-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="page-head">
+    <h1>Momentum carousel &mdash; 15 variations</h1>
+    <p><strong>What this is:</strong> 15 different 7-slide carousels, each with its own framing, featured person, and curriculum spotlight, so the same program doesn't read like the same repost every time. Give each one to the EO member or coach featured in it, they're more likely to share their own slide.</p>
+    <p>Jump to a variant below, or scroll through all of them. Each has its own download section.</p>
+  </div>
+
+  <div class="index-nav">
+    <h2>All 15 variants</h2>
+    <ol id="index-list"></ol>
+  </div>
+
+  <div id="root"></div>
+
+  <script>
+    const P = (name) => 'https://eomomentum.com/assets/photos/' + name;
+    const T = (name) => 'https://eomomentum.com/assets/team/' + name;
+
+    const AL = { name: 'Al Danto', role: 'EO Houston founding member, exited founder, Rice Sr. Lecturer', photo: T('al-danto.png'), pos: 'center 20%' };
+    const JACKIE = { name: 'Jackie Fisher', role: 'Rice alum, Owner of 3 Men Movers', photo: T('jackie.jpg'), pos: 'center' };
+
+    const STD_UNLOCK = { kicker: 'The real unlock', headline: "Real experience from founders who&rsquo;ve done it.", body: "Direct access to Entrepreneurs&rsquo; Organization Houston&rsquo;s network of 200+ businesses that have already scaled past $1M, part of a global network of 20,000+ entrepreneurs in 224 chapters worldwide." };
+    const STD_CHECKLIST = ["Owner or co-founder of a business", "Yearly revenue over $250,000", "Ready to build past $1M in under two years"];
+    const COACH_CHECKLIST = ["Current or former EO Houston member", "Willing to coach a team of 8 members for 12 months", "Available to attend all 8 lectures"];
+    const STD_DATES = [["Sep 15, 2026", "applications close"], ["Aug&ndash;Sept 2026", "interviews"], ["Oct 2026", "cohort begins"]];
+
+    const VARIANTS = [
+      {
+        slug: "01-al-founding-story", label: "Al Danto &mdash; founding story",
+        note: "Give to Al. Leads with his EO Houston founding-member story.",
+        cover: { eyebrow: "FOR EO HOUSTON MEMBERS", sub: "A two-year accelerator built by an EO Houston founding member.", photo: P("connect-lounge.jpg"), pos: "center 20%" },
+        spotlight: { kind: "solo", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Al helped found EO Houston and now leads Momentum as Program Director, after exiting his own company. He teaches Entrepreneurship as a Senior Lecturer at Rice.", person: AL },
+        curriculum: { kind: "month", tag: "MONTH 1 &middot; KICK-OFF &amp; FOUNDATIONS", headline: "Foundations, from day one.", body: "Apply the Eisenhower Matrix to prioritize your workload and identify at least one revenue stream with potential to become recurring.", photo: P("classroom.jpg"), pos: "center 30%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-highfive.jpg"), pos: "center 30%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("gala-group.jpg"), pos: "center 25%" },
+        dates: { photo: P("social-cornhole.jpg"), pos: "center 25%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("gala-four.jpg"), pos: "center 30%" },
+      },
+      {
+        slug: "02-jackie-real-operator", label: "Jackie Fisher &mdash; real operator",
+        note: "Give to Jackie. Leads with her as a Rice alum who built a real company.",
+        cover: { eyebrow: "REAL OPERATORS, REAL RESULTS", sub: "Curriculum shaped by real Houston founders, not textbooks.", photo: P("classroom.jpg"), pos: "center 30%" },
+        spotlight: { kind: "solo", kicker: "Who&rsquo;s behind Momentum", headline: "Not theory. Real operators.", body: "Jackie is a Rice alum who built 3 Men Movers from the ground up. She gave hands-on input on the Momentum curriculum, so it reflects how businesses actually grow.", person: JACKIE },
+        curriculum: { kind: "month", tag: "MONTH 2 &middot; ENTREPRENEURIAL DNA", headline: "Know your own leadership gaps.", body: "Use your BOSI profile to make one strategic delegation decision and identify the leadership gap most likely to constrain your company&rsquo;s growth.", photo: P("retreat-forum.jpg"), pos: "center" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("connect-lounge.jpg"), pos: "center 15%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("gala-four.jpg"), pos: "center 30%" },
+        dates: { photo: P("social-highfive.jpg"), pos: "center 30%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("gala-group.jpg"), pos: "center 25%" },
+      },
+      {
+        slug: "03-brian-systems-builder", label: "Brian Gendron &mdash; systems builder",
+        note: "Give to Brian. Leads with EOS vision-building, Month 3 of the curriculum.",
+        cover: { eyebrow: "FOR HOUSTON FOUNDERS READY TO SCALE", sub: "A real operating system for your business.", photo: P("gala-group.jpg"), pos: "center 25%" },
+        spotlight: { kind: "solo", kicker: "Who&rsquo;s behind Momentum", headline: "Built by real operators.", body: "Brian built Riot Comedy Entertainment into a real business and now helps lead Momentum, EO Houston&rsquo;s two-year accelerator for founders ready to scale.", person: { name: "Brian Gendron", role: "Founder &amp; CEO, Riot Comedy Entertainment", photo: T("brian.jpg"), pos: "center" } },
+        curriculum: { kind: "month", tag: "MONTH 3 &middot; INTRO TO EOS", headline: "Get your vision on paper.", body: "Draft the five Vision-side components of your V/TO, including Core Values, Core Focus, 10-Year Target, and 3-Year Picture, at 80% clarity.", photo: P("social-cornhole.jpg"), pos: "center 25%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-highfive.jpg"), pos: "center 30%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("connect-lounge.jpg"), pos: "center 15%" },
+        dates: { photo: P("gala-four.jpg"), pos: "center 30%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("retreat-forum.jpg"), pos: "center" },
+      },
+      {
+        slug: "04-sarah-vision-to-traction", label: "Sarah Seitz &mdash; vision to traction",
+        note: "Give to Sarah. Leads with turning a vision into a real 90-day plan, Month 4.",
+        cover: { eyebrow: "FOR EO HOUSTON MEMBERS", sub: "Turn your vision into a real, executable plan.", photo: P("gala-four.jpg"), pos: "center 30%" },
+        spotlight: { kind: "solo", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Sarah founded and runs The Enrichery, and helps lead Momentum, giving members a real operator&rsquo;s eye on what it takes to grow past $1M.", person: { name: "Sarah Seitz", role: "Founder &amp; CEO, The Enrichery", photo: T("sarah.jpg"), pos: "center" } },
+        curriculum: { kind: "month", tag: "MONTH 4 &middot; PLANNING FOR 2026", headline: "From vision to traction.", body: "Translate your annual vision into three to five SMART 90-day Rocks with clear owners, and name what you must stop doing to execute them.", photo: P("classroom.jpg"), pos: "center 30%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("gala-group.jpg"), pos: "center 25%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("social-highfive.jpg"), pos: "center 30%" },
+        dates: { photo: P("classroom.jpg"), pos: "center 30%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("gala-group.jpg"), pos: "center 25%" },
+      },
+      {
+        slug: "05-robert-position-story-amplify", label: "Robert De Los Santos &mdash; marketing",
+        note: "Give to Robert. Leads with the Month 5 marketing/positioning curriculum.",
+        cover: { eyebrow: "MARKETING THAT ACTUALLY WORKS", sub: "Position, tell your story, and amplify it.", photo: P("retreat-yoga-wide.jpg"), pos: "center 62%" },
+        spotlight: { kind: "solo", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Robert runs Sky High Party Rentals and helps lead Momentum, bringing a real operator&rsquo;s eye to how the program is structured.", person: { name: "Robert De Los Santos", role: "CEO, Sky High Party Rentals", photo: T("robert.jpg"), pos: "center" } },
+        curriculum: { kind: "month", tag: "MONTH 5 &middot; MARKETING", headline: "Position, story, amplify.", body: "Write a specific positioning statement and identify three differentiators that are remarkable, relevant, and rare in combination, grounded in a defined target audience.", photo: P("retreat-forum.jpg"), pos: "center" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-cornhole.jpg"), pos: "center 25%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("connect-lounge.jpg"), pos: "center 20%" },
+        dates: { photo: P("gala-group.jpg"), pos: "center 25%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("social-highfive.jpg"), pos: "center 30%" },
+      },
+      {
+        slug: "06-avneesh-right-people-right-seats", label: "Avneesh Oberoi &mdash; right people, right seats",
+        note: "Give to Avneesh. Leads with the Month 6 hiring/org curriculum.",
+        cover: { eyebrow: "BUILD THE RIGHT TEAM", sub: "The right people, in the right seats.", photo: P("gala-group.jpg"), pos: "center 25%" },
+        spotlight: { kind: "solo", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Avneesh founded Oberoi Investments and The DoughCone, and helps lead Momentum, bringing a real operator&rsquo;s eye to how the program is structured.", person: { name: "Avneesh Oberoi", role: "Founder, Oberoi Investments &amp; The DoughCone", photo: T("avneesh.jpg"), pos: "center" } },
+        curriculum: { kind: "month", tag: "MONTH 6 &middot; RIGHT PEOPLE, RIGHT SEATS", headline: "Hire for the seat, not the resume.", body: "Architect one upcoming role using defined success outcomes, performance domains, and structured behavioral interview questions, before reviewing a single resume.", photo: P("classroom.jpg"), pos: "center 30%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-highfive.jpg"), pos: "center 30%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("gala-four.jpg"), pos: "center 30%" },
+        dates: { photo: P("connect-lounge.jpg"), pos: "center 15%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("social-cornhole.jpg"), pos: "center 25%" },
+      },
+      {
+        slug: "07-steffie-financial-playbook", label: "Dr. Steffie Tomson &mdash; financial playbook",
+        note: "Give to Steffie. Leads with the Month 7 finance curriculum.",
+        cover: { eyebrow: "KNOW YOUR NUMBERS", sub: "Master your founder&rsquo;s financial playbook.", photo: P("connect-lounge.jpg"), pos: "center 20%" },
+        spotlight: { kind: "solo", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Dr. Steffie Tomson founded and runs Steffie&rsquo;s, and helps lead Momentum, bringing a real operator&rsquo;s eye to how the program is structured.", person: { name: "Dr. Steffie Tomson", role: "Founder &amp; CEO, Steffie&rsquo;s", photo: T("steffie.jpg"), pos: "center" } },
+        curriculum: { kind: "month", tag: "MONTH 7 &middot; FINANCE DAY", headline: "Know your numbers cold.", body: "Calculate your Cash Conversion Cycle and funding gap using real business numbers, and select three to five KPIs to track weekly on your EOS Scorecard.", photo: P("gala-four.jpg"), pos: "center 30%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("classroom.jpg"), pos: "center 30%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("retreat-forum.jpg"), pos: "center" },
+        dates: { photo: P("gala-group.jpg"), pos: "center 25%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("gala-four.jpg"), pos: "center 30%" },
+      },
+      {
+        slug: "08-kyle-financing-growth", label: "Kyle Griffin &mdash; financing growth",
+        note: "Give to Kyle. Leads with the Month 8 debt-vs-equity curriculum.",
+        cover: { eyebrow: "FUND YOUR NEXT STAGE", sub: "Debt, equity, or both, know which fits.", photo: P("social-cornhole.jpg"), pos: "center 25%" },
+        spotlight: { kind: "solo", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Kyle owns Creative Heights Agency and helps lead Momentum, bringing a real operator&rsquo;s eye to how the program is structured.", person: { name: "Kyle Griffin", role: "Owner, Creative Heights Agency", photo: T("kyle.jpg"), pos: "center" } },
+        curriculum: { kind: "month", tag: "MONTH 8 &middot; FINANCING YOUR GROWTH", headline: "Debt vs. equity, know which fits.", body: "Determine whether debt, equity, or a combination fits your situation, calculate your Debt Service Coverage Ratio, and draft a specific, fundable capital ask.", photo: P("gala-group.jpg"), pos: "center 25%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-highfive.jpg"), pos: "center 30%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("classroom.jpg"), pos: "center 30%" },
+        dates: { photo: P("connect-lounge.jpg"), pos: "center 20%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("gala-four.jpg"), pos: "center 30%" },
+      },
+      {
+        slug: "09-rosalee-member-story", label: "Rosalee Murugan &mdash; a member&rsquo;s story",
+        note: "Give to Rosalee, or use as a general testimonial-led post. Leads with her real quote.",
+        cover: { eyebrow: "A MEMBER&rsquo;S STORY", sub: "From 16-hour days to a business that runs without her.", photo: P("gala-group.jpg"), pos: "center 25%" },
+        spotlight: { kind: "testimonial", quote: "Before joining the program, I was working 13 to 16 hours a day, 7 days a week, buried in my business and missing out on life. With coaching, structure, and support, I stepped back and began working on the business, not just in it.", person: { name: "Rosalee Murugan", role: "Owner, RLD Bookkeeping and Tax Solutions", photo: T("rosalee.jpg") } },
+        curriculum: { kind: "month", tag: "MONTH 1 &middot; KICK-OFF &amp; FOUNDATIONS", headline: "Where every member starts.", body: "Apply the Eisenhower Matrix to prioritize your workload and identify at least one revenue stream with potential to become recurring.", photo: P("classroom.jpg"), pos: "center 30%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-highfive.jpg"), pos: "center 30%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("gala-four.jpg"), pos: "center 30%" },
+        dates: { photo: P("social-cornhole.jpg"), pos: "center 25%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("connect-lounge.jpg"), pos: "center 20%" },
+      },
+      {
+        slug: "10-become-a-coach", label: "Become a coach (2026/2027)",
+        note: "Coach recruitment. Different ask and CTA, attend free in exchange for coaching.",
+        cover: { eyebrow: "FOR EO HOUSTON MEMBERS", sub: "Coach the next cohort. Attend free. Give back.", photo: P("classroom.jpg"), pos: "center 30%" },
+        spotlight: { kind: "solo", kicker: "Who&rsquo;s behind Momentum", headline: "Led by an EO Houston founding member.", body: "Al helped found EO Houston and now leads Momentum as Program Director, after exiting his own company. He teaches Entrepreneurship as a Senior Lecturer at Rice.", person: AL },
+        curriculum: { kind: "coach", tag: "COACH THE 2026/2027 COHORT", headline: "Give 12 months. Get 8 lectures free.", body: "Coach a team of 8 Momentum members for 12 months, and attend all 8 lectures in exchange, no tuition.", photo: P("retreat-forum.jpg"), pos: "center" },
+        forWho: { headline: "Ready to coach a team of 8?", photo: P("connect-lounge.jpg"), pos: "center 15%", checklist: COACH_CHECKLIST },
+        unlock: { kicker: "The real unlock", headline: "Stay sharp while you give back.", body: "Coaching is one of the highest-leverage ways to stay sharp as an operator, while giving the next cohort of EO Houston members the same real experience you&rsquo;ve had access to.", photo: P("gala-group.jpg"), pos: "center 25%" },
+        dates: { photo: P("social-cornhole.jpg"), pos: "center 25%" },
+        cta: { headline: "Coach for Momentum today.", photo: P("gala-four.jpg"), pos: "center 30%" },
+      },
+      {
+        slug: "11-the-forum", label: "The Forum",
+        note: "Leads with the confidential peer Forum, meets monthly year-round.",
+        cover: { eyebrow: "A CONFIDENTIAL PEER FORUM", sub: "Meet monthly, all year, with founders who get it.", photo: P("retreat-forum.jpg"), pos: "center" },
+        spotlight: { kind: "pair", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Al Danto, an EO Houston founding member and seasoned entrepreneur who exited his own company, refined the curriculum with input from Jackie Fisher, a Rice alum and founder herself.", people: [AL, JACKIE] },
+        curriculum: { kind: "month", tag: "THE FORUM", headline: "The room where real talk happens.", body: "Beyond the 8 lectures, your confidential peer Forum group meets monthly, year-round, the same 8 people, working through real business and life challenges together.", photo: P("retreat-forum.jpg"), pos: "center" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-highfive.jpg"), pos: "center 30%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("gala-group.jpg"), pos: "center 25%" },
+        dates: { photo: P("gala-four.jpg"), pos: "center 30%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("classroom.jpg"), pos: "center 30%" },
+      },
+      {
+        slug: "12-the-eo-network", label: "The EO network unlock",
+        note: "Leads with the 200+ business EO Houston network.",
+        cover: { eyebrow: "200+ HOUSTON BUSINESSES. ONE NETWORK.", sub: "The unlock most accelerators can&rsquo;t offer.", photo: P("gala-group.jpg"), pos: "center 25%" },
+        spotlight: { kind: "pair", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Al Danto, an EO Houston founding member and seasoned entrepreneur who exited his own company, refined the curriculum with input from Jackie Fisher, a Rice alum and founder herself.", people: [AL, JACKIE] },
+        curriculum: { kind: "month", tag: "THE EO NETWORK", headline: "20,000+ entrepreneurs, one phone call away.", body: "As a Momentum member, you get direct access to Entrepreneurs&rsquo; Organization Houston&rsquo;s full network, 200+ local businesses that have already scaled past $1M.", photo: P("gala-four.jpg"), pos: "center 30%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-cornhole.jpg"), pos: "center 25%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("connect-lounge.jpg"), pos: "center 20%" },
+        dates: { photo: P("social-highfive.jpg"), pos: "center 30%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("gala-group.jpg"), pos: "center 25%" },
+      },
+      {
+        slug: "13-rice-partnership", label: "The Rice Lilie Lab partnership",
+        note: "Leads with the Rice institutional connection.",
+        cover: { eyebrow: "IN PARTNERSHIP WITH RICE&rsquo;S LILIE LAB", sub: "Academic rigor, built by real operators.", photo: P("classroom.jpg"), pos: "center 30%" },
+        spotlight: { kind: "pair", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Al Danto, an EO Houston founding member and seasoned entrepreneur who exited his own company, refined the curriculum with input from Jackie Fisher, a Rice alum and founder herself.", people: [AL, JACKIE] },
+        curriculum: { kind: "month", tag: "RICE LILIE LAB", headline: "Academic rigor. Real-world application.", body: "Al Danto teaches Entrepreneurship at Rice&rsquo;s Lilie Lab as a Senior Lecturer, and brought that institutional rigor into a curriculum built for founders already in the arena, not students.", photo: P("classroom.jpg"), pos: "center 30%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("gala-four.jpg"), pos: "center 30%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("retreat-forum.jpg"), pos: "center" },
+        dates: { photo: P("gala-group.jpg"), pos: "center 25%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("social-highfive.jpg"), pos: "center 30%" },
+      },
+      {
+        slug: "14-community-culture", label: "Community &amp; culture",
+        note: "Leads with the social side, more than a classroom.",
+        cover: { eyebrow: "MORE THAN A CLASSROOM", sub: "A community that shows up for each other, year-round.", photo: P("social-charades.jpg"), pos: "center 40%" },
+        spotlight: { kind: "pair", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Al Danto, an EO Houston founding member and seasoned entrepreneur who exited his own company, refined the curriculum with input from Jackie Fisher, a Rice alum and founder herself.", people: [AL, JACKIE] },
+        curriculum: { kind: "month", tag: "BEYOND THE CLASSROOM", headline: "A community, not just a curriculum.", body: "Social events throughout the year, retreats, and a peer Forum that meets monthly, Momentum is built around people who actually show up for each other.", photo: P("retreat-yoga-wide.jpg"), pos: "center 62%" },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-cornhole.jpg"), pos: "center 25%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("gala-group.jpg"), pos: "center 25%" },
+        dates: { photo: P("gala-four.jpg"), pos: "center 30%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("social-highfive.jpg"), pos: "center 30%" },
+      },
+      {
+        slug: "15-full-roadmap", label: "The full Year One roadmap",
+        note: "Leads with the complete 8-month curriculum as a compact roadmap.",
+        cover: { eyebrow: "THE FULL CURRICULUM", sub: "Eight months, eight real operating skills.", photo: P("classroom.jpg"), pos: "center 30%" },
+        spotlight: { kind: "pair", kicker: "Who&rsquo;s behind Momentum", headline: "Real experience, not theory.", body: "Al Danto, an EO Houston founding member and seasoned entrepreneur who exited his own company, refined the curriculum with input from Jackie Fisher, a Rice alum and founder herself.", people: [AL, JACKIE] },
+        curriculum: { kind: "roadmap", tag: "YEAR ONE, MONTH BY MONTH", headline: "The full roadmap.", months: [
+          ["M1", "Kick-Off &amp; Foundations"], ["M2", "Entrepreneurial DNA"], ["M3", "Intro to EOS: Vision"],
+          ["M4", "Planning: Vision to Traction"], ["M5", "Marketing: Position, Story, Amplify"],
+          ["M6", "Right People, Right Seats"], ["M7", "Finance Day"], ["M8", "Financing Your Growth"]
+        ] },
+        forWho: { headline: "Ready to build past $1M?", photo: P("social-highfive.jpg"), pos: "center 30%", checklist: STD_CHECKLIST },
+        unlock: { ...STD_UNLOCK, photo: P("gala-group.jpg"), pos: "center 25%" },
+        dates: { photo: P("gala-four.jpg"), pos: "center 30%" },
+        cta: { headline: "Apply for Momentum today.", photo: P("connect-lounge.jpg"), pos: "center 20%" },
+      },
+    ];
+
+    function logoSvg(id) {
+      return `<svg class="mark" viewBox="0 0 48 48" width="52" height="52" role="img" aria-label="Momentum mark">
+        <defs><linearGradient id="${id}" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6D45D0" /><stop offset="1" stop-color="#9B6BFF" /></linearGradient></defs>
+        <circle cx="24" cy="24" r="22" fill="none" stroke="url(#${id})" stroke-width="3.4" />
+        <rect x="14" y="26" width="5.5" height="10" rx="1.5" fill="url(#${id})" />
+        <rect x="21.5" y="21" width="5.5" height="15" rx="1.5" fill="url(#${id})" />
+        <rect x="29" y="16" width="5.5" height="20" rx="1.5" fill="url(#${id})" />
+      </svg>`;
+    }
+    function logoRow(id) {
+      return `<div class="logo-row">${logoSvg(id)}<span class="word"><strong>EO Houston</strong><span>MOMENTUM</span></span></div>`;
+    }
+
+    function renderSpotlight(sp) {
+      if (sp.kind === 'solo') {
+        return `<p class="kicker">${sp.kicker}</p><h2 class="card-title">${sp.headline}</h2>
+          <p class="card-body" style="font-size:22px;margin:12px 0 0;">${sp.body}</p>
+          <div class="solo-photo"><img src="${sp.person.photo}" alt="${sp.person.name}" style="object-position:${sp.person.pos || 'center'};" /></div>
+          <div class="solo-cap"><div class="pn">${sp.person.name}</div><div class="pr">${sp.person.role}</div></div>`;
+      }
+      if (sp.kind === 'testimonial') {
+        return `${logoRow('mgq')}<div style="flex:1"></div>
+          <p class="quote-mark">&ldquo;</p>
+          <p class="quote-text">${sp.quote}</p>
+          <div class="quote-who"><img src="${sp.person.photo}" alt="${sp.person.name}" /><div><div class="qn">${sp.person.name}</div><div class="qr">${sp.person.role}</div></div></div>`;
+      }
+      // pair
+      return `<p class="kicker">${sp.kicker}</p><h2 class="card-title">${sp.headline}</h2>
+        <p class="card-body" style="font-size:22px;margin:12px 0 0;">${sp.body}</p>
+        <div class="people-row">${sp.people.map(p => `
+          <div class="person-tile"><img src="${p.photo}" alt="${p.name}" style="object-position:${p.pos || 'center'};" />
+            <div class="cap"><div class="pn">${p.name}</div><div class="pr">${p.role}</div></div>
+          </div>`).join('')}</div>`;
+    }
+
+    function renderCurriculum(c) {
+      if (c.kind === 'roadmap') {
+        return `<p class="kicker">${c.tag}</p><h2 class="card-title" style="font-size:44px;">${c.headline}</h2>
+          <ul class="roadmap-list">${c.months.map(([m, t]) => `<li><span class="rm">${m}</span><span class="rt">${t}</span></li>`).join('')}</ul>`;
+      }
+      // month or coach
+      return `<p class="kicker">${c.tag}</p><h2 class="card-title" style="font-size:44px;">${c.headline}</h2>
+        <div class="feature-photo"><img src="${c.photo}" alt="Momentum curriculum" style="object-position:${c.pos || 'center'};" /></div>
+        <p class="card-body" style="font-size:21px;">${c.body}</p>`;
+    }
+
+    function renderVariant(v, idx) {
+      const n = idx + 1;
+      return `
+      <p class="slide-label">Slide 1 of 7 &mdash; Cover</p>
+      <div class="card bleed" id="v${n}-slide-1">
+        <img class="bg-photo" src="${v.cover.photo}" alt="Momentum" style="object-position:${v.cover.pos};" />
+        <div class="scrim"></div>
+        <div class="content">
+          ${logoRow('mg' + n + 'a')}
+          <div style="flex:1"></div>
+          <p class="kicker">${v.cover.eyebrow}</p>
+          <h1 class="cover-headline">Stop grinding.<br /><span class="grad">Start growing.</span></h1>
+          <p class="cover-sub">${v.cover.sub}</p>
+          <div class="swipe-hint">Swipe &rarr;</div>
+        </div>
+      </div>
+
+      <p class="slide-label">Slide 2 of 7 &mdash; Who&rsquo;s behind it</p>
+      <div class="card ${v.spotlight.kind === 'testimonial' ? 'navy' : 'light'}" id="v${n}-slide-2">${renderSpotlight(v.spotlight)}</div>
+
+      <p class="slide-label">Slide 3 of 7 &mdash; Curriculum spotlight</p>
+      <div class="card light" id="v${n}-slide-3">${renderCurriculum(v.curriculum)}</div>
+
+      <p class="slide-label">Slide 4 of 7 &mdash; Who it&rsquo;s for</p>
+      <div class="card light" id="v${n}-slide-4">
+        <p class="kicker">Who it&rsquo;s for</p><h2 class="card-title">${v.forWho.headline}</h2>
+        <div class="feature-photo"><img src="${v.forWho.photo}" alt="Momentum members" style="object-position:${v.forWho.pos};" /></div>
+        <ul class="checklist">${v.forWho.checklist.map(t => `<li><span class="dot">&#10003;</span> ${t}</li>`).join('')}</ul>
+      </div>
+
+      <p class="slide-label">Slide 5 of 7 &mdash; The real unlock</p>
+      <div class="card bleed" id="v${n}-slide-5">
+        <img class="bg-photo" src="${v.unlock.photo}" alt="Momentum members" style="object-position:${v.unlock.pos};" />
+        <div class="scrim"></div>
+        <div class="content" style="justify-content:flex-end;">
+          <p class="kicker">${v.unlock.kicker}</p>
+          <h2 class="card-title" style="color:#fff;font-size:48px;margin-bottom:18px;">${v.unlock.headline}</h2>
+          <p class="card-body" style="color:rgba(255,255,255,0.88);">${v.unlock.body}</p>
+        </div>
+      </div>
+
+      <p class="slide-label">Slide 6 of 7 &mdash; Key dates</p>
+      <div class="card accent" id="v${n}-slide-6">
+        <div class="photo-band"><img src="${v.dates.photo}" alt="Momentum and EO Houston members" style="object-position:${v.dates.pos};" /></div>
+        <div class="accent-content">
+          <p class="kicker">Key dates</p><h2 class="card-title">Cohort begins October 2026.</h2>
+          <ul class="date-list">${STD_DATES.map(([d, t]) => `<li><span class="d">${d}</span><span class="t">&mdash; ${t}</span></li>`).join('')}</ul>
+        </div>
+      </div>
+
+      <p class="slide-label">Slide 7 of 7 &mdash; Apply</p>
+      <div class="card bleed" id="v${n}-slide-7">
+        <img class="bg-photo" src="${v.cta.photo}" alt="Momentum and EO Houston members" style="object-position:${v.cta.pos};" />
+        <div class="scrim"></div>
+        <div class="content" style="justify-content:flex-end;">
+          <div style="margin-bottom:32px;">${logoRow('mg' + n + 'b')}</div>
+          <h2 class="cta-headline">${v.cta.headline}</h2>
+          <a class="cta-url" href="https://eomomentum.com">eomomentum.com</a>
+          <p class="fine-print">Momentum is an independent program of EO Houston, a chapter of the Entrepreneurs&rsquo; Organization. Rice University faculty and alumni participate as instructors and coaches in their individual capacities.</p>
+        </div>
+      </div>
+
+      <div class="downloads">
+        <a class="download-all" href="assets/carousel-variants/${v.slug}/carousel.zip" download>Download all 7 (ZIP) &darr;</a>
+      </div>`;
+    }
+
+    const root = document.getElementById('root');
+    const params = new URLSearchParams(window.location.search);
+    const onlyVariant = params.get('variant');
+    const exportSlide = params.get('export');
+
+    let html = '';
+    VARIANTS.forEach((v, i) => {
+      if (onlyVariant && String(i + 1) !== onlyVariant) return;
+      html += `<div class="variant-group">
+        <div class="variant-header"><p class="vnum">VARIANT ${i + 1} OF 15</p><h2>${v.label}</h2><p>${v.note}</p></div>
+        ${renderVariant(v, i)}
+      </div>`;
+    });
+    root.innerHTML = html;
+
+    const idxList = document.getElementById('index-list');
+    idxList.innerHTML = VARIANTS.map((v, i) => `<li><a href="?variant=${i + 1}">${v.label}</a> &mdash; ${v.note}</li>`).join('');
+
+    if (exportSlide && onlyVariant) {
+      document.body.classList.add('export-mode');
+      const target = document.getElementById('v' + onlyVariant + '-slide-' + exportSlide);
+      if (target) target.classList.add('export-target');
+    }
+  </script>
+</body>
+</html>
