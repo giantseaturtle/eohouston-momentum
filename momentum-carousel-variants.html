@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Momentum &mdash; 15 carousel variations</title>
+  <title>Momentum &mdash; carousel variations</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,6 +19,7 @@
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     body {
       background: #e4e6ef; font-family: 'Inter', -apple-system, sans-serif;
       display: flex; flex-direction: column; align-items: center; padding: 40px 16px 100px; gap: 20px;
@@ -36,6 +37,15 @@
 
     .slide-label { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted); }
 
+    /* Cards are authored at a fixed 1080x1080 with fixed pixel type inside.
+       On narrow screens we scale the whole card down as one unit (JS sets
+       --card-scale on the frame) instead of letting the box shrink while the
+       type stays huge. .card-frame reserves the scaled space in the layout. */
+    .card-frame { width: 100%; max-width: 1080px; aspect-ratio: 1/1; position: relative; }
+    .card-frame .card {
+      position: absolute; top: 0; left: 0; max-width: none;
+      transform-origin: top left; transform: scale(var(--card-scale, 1));
+    }
     .card {
       width: 1080px; height: 1080px; max-width: 100%; aspect-ratio: 1/1;
       position: relative; overflow: hidden; border-radius: 12px;
@@ -172,19 +182,56 @@
     .index-nav ol { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.9; color: var(--body); }
     .index-nav a { color: var(--purple); font-weight: 600; text-decoration: none; }
     .index-nav a:hover { text-decoration: underline; }
+    .index-nav > summary {
+      font-family: 'Sora', sans-serif; color: var(--eo-navy); font-size: 16px; font-weight: 700;
+      cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .index-nav > summary::-webkit-details-marker { display: none; }
+    .index-nav > summary::after { content: 'Show'; font-size: 12px; font-weight: 700; color: var(--purple); letter-spacing: 0.04em; }
+    .index-nav[open] > summary::after { content: 'Hide'; }
+    .index-nav[open] > summary { margin-bottom: 12px; }
+
+    .variant-nav { max-width: 900px; width: 100%; display: flex; gap: 10px; margin-top: 8px; }
+    .variant-nav a {
+      flex: 1; text-align: center; background: #fff; border: 1px solid var(--line); border-radius: 12px;
+      padding: 14px 12px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px;
+      color: var(--eo-navy); text-decoration: none; line-height: 1.35;
+    }
+    .variant-nav a.disabled { opacity: 0.35; pointer-events: none; }
+
+    /* Shared single-variant link: lead with the slides, not with the internal
+       intro copy and the full variant index. The index moves to the bottom. */
+    body.single-variant .page-head { display: none; }
+    body.single-variant .index-nav { margin-top: 28px; }
+    body.single-variant .variant-header { margin-top: 4px; }
+
+    @media (max-width: 760px) {
+      body { padding: 18px 12px 56px; gap: 14px; }
+      .page-head h1 { font-size: 19px; }
+      .page-head p { font-size: 13px; line-height: 1.6; }
+      .variant-header { margin: 14px 0 2px; }
+      .variant-header h2 { font-size: 17px; }
+      .variant-header p { font-size: 12.5px; }
+      .variant-header .vnum { font-size: 11px; }
+      .slide-label { font-size: 11px; }
+      .index-nav { padding: 14px 16px; border-radius: 12px; }
+      .index-nav ol { font-size: 13px; line-height: 1.8; padding-left: 18px; }
+      .download-all { width: 100%; justify-content: center; padding: 15px 20px; font-size: 15px; border-radius: 12px; }
+      .variant-nav a { padding: 13px 10px; font-size: 12.5px; }
+    }
   </style>
 </head>
 <body>
   <div class="page-head">
-    <h1>Momentum carousel &mdash; 15 variations</h1>
-    <p><strong>What this is:</strong> 15 different 7-slide carousels, each with its own framing, featured person, and curriculum spotlight, so the same program doesn't read like the same repost every time. Give each one to the EO member or coach featured in it, they're more likely to share their own slide.</p>
+    <h1>Momentum carousel variations</h1>
+    <p><strong>What this is:</strong> a set of 7-slide carousels, each with its own framing, featured person, and curriculum spotlight, so the same program doesn't read like the same repost every time. Give each one to the EO member or coach featured in it, they're more likely to share their own slide.</p>
     <p>Jump to a variant below, or scroll through all of them. Each has its own download section.</p>
   </div>
 
-  <div class="index-nav">
-    <h2>All 15 variants</h2>
+  <details class="index-nav" id="index-nav">
+    <summary id="index-summary">All variants</summary>
     <ol id="index-list"></ol>
-  </div>
+  </details>
 
   <div id="root"></div>
 
@@ -672,19 +719,62 @@
       if (v.retired) return;
       if (onlyVariant && String(i + 1) !== onlyVariant) return;
       html += `<div class="variant-group">
-        <div class="variant-header"><p class="vnum">VARIANT ${i + 1} OF 15</p><h2>${v.label}</h2><p>${v.note}</p></div>
+        <div class="variant-header"><p class="vnum">VARIANT ${i + 1}</p><h2>${v.label}</h2><p>${v.note}</p></div>
         ${renderVariant(v, i)}
       </div>`;
     });
     root.innerHTML = html;
 
+    const live = VARIANTS.map((v, i) => v.retired ? null : i + 1).filter(Boolean);
     const idxList = document.getElementById('index-list');
     idxList.innerHTML = VARIANTS.map((v, i) => v.retired ? '' : `<li value="${i + 1}"><a href="?variant=${i + 1}">${v.label}</a> &mdash; ${v.note}</li>`).join('');
+    document.getElementById('index-summary').textContent = 'All ' + live.length + ' variants';
 
-    if (exportSlide && onlyVariant) {
+    const isExport = Boolean(exportSlide && onlyVariant);
+    if (isExport) {
       document.body.classList.add('export-mode');
       const target = document.getElementById('v' + onlyVariant + '-slide-' + exportSlide);
       if (target) target.classList.add('export-target');
+    }
+
+    // Single-variant view: collapse the long index and add prev/next so a phone
+    // doesn't need the full list scrolled past to get to the slides.
+    const indexNav = document.getElementById('index-nav');
+    if (!onlyVariant) {
+      indexNav.open = true;
+    } else if (!isExport) {
+      document.body.classList.add('single-variant');
+      document.body.appendChild(indexNav);
+      const pos = live.indexOf(Number(onlyVariant));
+      const prev = pos > 0 ? live[pos - 1] : null;
+      const next = pos > -1 && pos < live.length - 1 ? live[pos + 1] : null;
+      const label = (n) => VARIANTS[n - 1].label;
+      const nav = document.createElement('div');
+      nav.className = 'variant-nav';
+      nav.innerHTML =
+        `<a class="${prev ? '' : 'disabled'}" href="${prev ? '?variant=' + prev : '#'}">&larr; ${prev ? label(prev) : 'Start'}</a>` +
+        `<a class="${next ? '' : 'disabled'}" href="${next ? '?variant=' + next : '#'}">${next ? label(next) : 'End'} &rarr;</a>`;
+      root.appendChild(nav);
+    }
+
+    // Scale each 1080x1080 card to fit the screen as one unit. Skipped in export
+    // mode, where the card must render at its true 1080px size for screenshots.
+    if (!isExport) {
+      document.querySelectorAll('#root .card').forEach((card) => {
+        const frame = document.createElement('div');
+        frame.className = 'card-frame';
+        card.parentNode.insertBefore(frame, card);
+        frame.appendChild(card);
+      });
+      const fitCards = () => {
+        document.querySelectorAll('.card-frame').forEach((frame) => {
+          frame.style.setProperty('--card-scale', Math.min(1, frame.clientWidth / 1080));
+        });
+      };
+      fitCards();
+      window.addEventListener('resize', fitCards);
+      window.addEventListener('orientationchange', fitCards);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCards);
     }
   </script>
 </body>
