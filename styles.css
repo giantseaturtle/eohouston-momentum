@@ -425,6 +425,7 @@ a { color: var(--purple); text-decoration: none; }
 }
 .d-label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; }
 .d-val { font-family: 'Sora', sans-serif; font-weight: 700; color: var(--ink); font-size: 1.02rem; }
+.d-ext { display: inline-block; margin-left: 0.45rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: var(--violet); color: #fff; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: middle; }
 .admit-note { color: var(--muted); font-size: 0.95rem; margin: 0 0 1.9rem; }
 .admit-webinar {
   margin: 1.6rem 0 0; padding: 1rem 1.2rem;
