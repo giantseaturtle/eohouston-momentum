@@ -232,7 +232,18 @@
       .btn { font-size: 12px; padding: 10px 18px; }
       footer { padding: 6px 30px 0; font-size: 9.5px; }
     }
+    /* Intake phase: "now" copy runs through the October 20, 2026 first class; "later" copy is the evergreen quarterly version. */
+    [data-phase="later"] { display: none; }
+    html.phase-later [data-phase="now"] { display: none; }
+    html.phase-later [data-phase="later"] { display: block; }
   </style>
+  <script>
+    (function () {
+      var q = location.search;
+      var later = /phase=later/.test(q) || (!/phase=now/.test(q) && new Date() > new Date('2026-10-20T23:59:59-05:00'));
+      if (later) document.documentElement.classList.add('phase-later');
+    })();
+  </script>
 </head>
 <body>
   <div class="sheet">
@@ -317,17 +328,24 @@
           <p class="fine">Investment: Year 1 <span class="price">$3,500</span>, Year 2 <span class="price">$3,000</span>, plus a one-time <span class="price">$500</span> initiation fee. Year 1 is prorated to the month you join.</p>
         </div>
         <div class="card accent">
-          <h3>Key dates for this cohort</h3>
-          <ul>
-            <li><span class="price">Oct 14, 2026</span>, applications close (extended)</li>
-            <li><span class="price">Through mid-October</span>, short interviews</li>
-            <li><span class="price">October 2026</span>, classes begin in Houston</li>
+          <h3>Key dates</h3>
+          <ul data-phase="now">
+            <li><span class="price">Oct 20, 2026</span>, first class in Houston</li>
+            <li><span class="price">January 2027</span>, next intake</li>
+            <li><span class="price">Quarterly</span>, new members accepted every quarter</li>
+          </ul>
+          <ul data-phase="later">
+            <li><span class="price">January 2027</span>, next intake, classes in Houston</li>
+            <li><span class="price">Quarterly</span>, new members accepted every quarter</li>
+            <li><span class="price">Rolling</span>, short interviews before each intake</li>
           </ul>
         </div>
       </div>
 
       <div class="cta-row">
-        <p><strong>Seats are limited and the application deadline has been extended to October 14.</strong>
+        <p data-phase="now"><strong>Seats are limited. Apply now to be considered for the October 20 class, or for our January intake.</strong>
+        The application takes about ten minutes. Learn more at eohouston.com/momentum, or reply to the EO Houston member who sent you this and they will introduce you to the program team.</p>
+        <p data-phase="later"><strong>Seats are limited and we accept new members quarterly. Apply now for our January intake.</strong>
         The application takes about ten minutes. Learn more at eohouston.com/momentum, or reply to the EO Houston member who sent you this and they will introduce you to the program team.</p>
         <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeicrKfptvb-ctvSiq_5z97gZiCk55enUbDkQiiE6VKNJATjg/viewform">Apply here</a>
       </div>

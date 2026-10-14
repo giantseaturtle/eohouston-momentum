@@ -191,7 +191,18 @@
       footer { padding: 7px 30px 10px; }
       .hero, .card, .stats, .grid2, .onramp, .cta-row { break-inside: avoid; }
     }
+    /* Intake phase: "now" copy runs through the October 20, 2026 first class; "later" copy is the evergreen quarterly version. */
+    [data-phase="later"] { display: none; }
+    html.phase-later [data-phase="now"] { display: none; }
+    html.phase-later [data-phase="later"] { display: block; }
   </style>
+  <script>
+    (function () {
+      var q = location.search;
+      var later = /phase=later/.test(q) || (!/phase=now/.test(q) && new Date() > new Date('2026-10-20T23:59:59-05:00'));
+      if (later) document.documentElement.classList.add('phase-later');
+    })();
+  </script>
 </head>
 <body>
   <div class="sheet">
@@ -267,10 +278,15 @@
         </div>
         <div class="card accent">
           <h3>Key dates</h3>
-          <ul>
-            <li><span class="price">Oct 14, 2026</span> &mdash; applications close (extended)</li>
-            <li><span class="price">Aug &ndash; Oct 2026</span> &mdash; interviews</li>
-            <li><span class="price">Oct 2026</span> &mdash; cohort begins</li>
+          <ul data-phase="now">
+            <li><span class="price">Oct 20, 2026</span> &mdash; first class</li>
+            <li><span class="price">January 2027</span> &mdash; next intake</li>
+            <li><span class="price">Quarterly</span> &mdash; new members accepted</li>
+          </ul>
+          <ul data-phase="later">
+            <li><span class="price">January 2027</span> &mdash; next intake</li>
+            <li><span class="price">Quarterly</span> &mdash; new members accepted</li>
+            <li><span class="price">Rolling</span> &mdash; interviews before each intake</li>
           </ul>
         </div>
       </div>
